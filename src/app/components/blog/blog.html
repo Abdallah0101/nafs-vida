@@ -1,0 +1,35 @@
+<section class="section blog" id="blog" aria-labelledby="blog-title">
+  <div class="container">
+    <header class="section-head" appReveal>
+      <span class="eyebrow">Blog</span>
+      <h2 id="blog-title">Reflexões para a mente e o coração</h2>
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
+      </div>
+    </header>
+
+    <div class="blog__grid">
+      @for (post of posts; track post.title; let i = $index) {
+        <article class="post" appReveal [appRevealDelay]="i * 110">
+          <div class="post__media pattern-bg pattern-bg--dark" aria-hidden="true">
+            <app-icon [name]="post.icon" />
+          </div>
+          <div class="post__body">
+            <span class="post__cat">{{ post.category }}</span>
+            <h3 class="post__title">
+              <a href="#blog">{{ post.title }}</a>
+            </h3>
+            <p class="post__excerpt">{{ post.excerpt }}</p>
+            <div class="post__meta">
+              <time [attr.datetime]="post.datetime">{{ post.date }}</time>
+              <a class="link-more" href="#blog" [attr.aria-label]="'Ler artigo: ' + post.title">
+                Ler artigo
+                <app-icon name="chevron" style="width: 14px; height: 14px" />
+              </a>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

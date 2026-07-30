@@ -1,0 +1,35 @@
+<section class="hero" id="inicio" aria-labelledby="hero-title">
+  <div class="hero__visual">
+    <img
+      class="hero__img"
+      src="assets/hero.jpg"
+      alt="Sala serena com arco islâmico, poltrona bordô, lanterna dourada e vista suave de uma mesquita"
+      width="1536"
+      height="1197"
+      fetchpriority="high"
+    />
+  </div>
+
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1 id="hero-title" appReveal>
+        Cuidar da mente<br />
+        é um <em>ato de fé</em>
+      </h1>
+      <p class="hero__lead" appReveal [appRevealDelay]="140">
+        A psicologia e o Islã caminham juntos no propósito de trazer cura,
+        equilíbrio e propósito para a vida.
+      </p>
+      <div class="hero__actions" appReveal [appRevealDelay]="280">
+        <a class="btn btn--primary" href="#contato">
+          Agendar Consulta
+          <app-icon name="calendar" style="width: 17px; height: 17px" />
+        </a>
+        <a class="link-more" href="#sobre">
+          Saiba mais
+          <app-icon name="chevron" style="width: 15px; height: 15px" />
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

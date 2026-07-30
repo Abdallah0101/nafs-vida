@@ -1,0 +1,35 @@
+<section
+  class="highlight pattern-bg pattern-bg--dark"
+  id="recursos"
+  aria-labelledby="resources-title"
+>
+  <div class="container highlight__grid">
+    <blockquote class="quote" appReveal>
+      <span class="quote__mark" aria-hidden="true">&ldquo;</span>
+      <p class="quote__text">
+        E não desesperem da misericórdia de Allah. Certamente, Allah perdoa
+        todos os pecados.
+      </p>
+      <footer class="quote__cite">Alcorão 39:53</footer>
+    </blockquote>
+
+    <div class="resources">
+      <h2 id="resources-title" appReveal>Recursos para sua jornada</h2>
+      <ul class="resources__grid">
+        @for (resource of resources; track resource.title; let i = $index) {
+          <li class="resource" appReveal [appRevealDelay]="120 + i * 110">
+            <span class="resource__icon" aria-hidden="true">
+              <app-icon [name]="resource.icon" />
+            </span>
+            <h3 class="resource__title">{{ resource.title }}</h3>
+            <p class="resource__text">{{ resource.text }}</p>
+            <a class="link-more resource__link" href="#blog">
+              {{ resource.action }}
+              <app-icon name="chevron" style="width: 14px; height: 14px" />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,90 @@
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2.6rem 1.7rem 2.2rem;
+  background: var(--color-sand);
+  border: 1px solid #e3d5d0;
+  border-radius: var(--radius);
+  text-align: center;
+  transition: transform var(--transition), border-color var(--transition),
+    box-shadow var(--transition);
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: rgba(176, 141, 87, 0.55);
+    box-shadow: var(--shadow-card);
+  }
+}
+
+/* Medalhão em forma de mihrab (arco islâmico) */
+.card__icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 70px;
+  margin-bottom: 1.5rem;
+  padding-bottom: 6px;
+  background: var(--color-primary);
+  color: var(--color-gold-soft);
+  border-radius: 999px 999px 10px 10px;
+  transition: background var(--transition);
+
+  app-icon {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+@supports (clip-path: path('M0 0')) {
+  .card__icon {
+    border-radius: 0;
+    clip-path: path(
+      'M31 1 C39 9 52 13 57 22 L57 62 Q57 66 53 66 L9 66 Q5 66 5 62 L5 22 C10 13 23 9 31 1 Z'
+    );
+  }
+}
+
+.card:hover .card__icon {
+  background: var(--color-secondary);
+}
+
+.card__title {
+  font-size: 1.42rem;
+  font-weight: 600;
+}
+
+.card__text {
+  margin-top: 0.7rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.card__link {
+  margin-top: auto;
+  padding-top: 1.4rem;
+  font-size: 0.88rem;
+}
+
+@media (max-width: 1023px) {
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 2.2rem 1.6rem 2rem;
+  }
+}

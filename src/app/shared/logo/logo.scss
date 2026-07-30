@@ -1,0 +1,74 @@
+:host {
+  display: inline-flex;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.logo__mark {
+  width: 44px;
+  height: 44px;
+  flex: none;
+  stroke: currentColor;
+  stroke-width: 1.3;
+  stroke-linecap: round;
+}
+
+.logo__mark ellipse {
+  stroke: var(--color-gold);
+  stroke-width: 1;
+}
+
+.logo__dot {
+  fill: var(--color-gold);
+  stroke: none;
+}
+
+.logo__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.logo__name {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+}
+
+.logo__tag {
+  margin-top: 0.22rem;
+  font-family: var(--font-sans);
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+}
+
+.logo--light {
+  color: var(--color-cream);
+
+  .logo__name {
+    color: var(--color-cream);
+  }
+
+  .logo__tag {
+    color: var(--color-gold-soft);
+  }
+}
+
+.logo--dark {
+  color: var(--color-primary);
+
+  .logo__name {
+    color: var(--color-primary);
+  }
+
+  .logo__tag {
+    color: var(--color-gold-deep);
+  }
+}

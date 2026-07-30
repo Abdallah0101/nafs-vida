@@ -1,0 +1,54 @@
+<header class="nav" [class.nav--scrolled]="scrolled()" [class.nav--open]="menuOpen()">
+  <div class="container nav__inner">
+    <a class="nav__brand" href="#inicio" aria-label="Nafs & Vida — Psicologia Islâmica" (click)="closeMenu()">
+      <app-logo tone="light" />
+    </a>
+
+    <nav class="nav__links" aria-label="Navegação principal">
+      @for (link of links; track link.href) {
+        <a [href]="link.href">{{ link.label }}</a>
+      }
+    </nav>
+
+    <div class="nav__actions">
+      <a class="btn btn--gold btn--sm nav__cta" href="#contato">Agendar Consulta</a>
+      <button
+        class="nav__burger"
+        type="button"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="menu-mobile"
+        [attr.aria-label]="menuOpen() ? 'Fechar menu' : 'Abrir menu'"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  class="overlay"
+  id="menu-mobile"
+  [class.overlay--open]="menuOpen()"
+  [attr.aria-hidden]="!menuOpen()"
+>
+  <nav class="overlay__nav" aria-label="Menu móvel">
+    @for (link of links; track link.href; let i = $index) {
+      <a
+        [href]="link.href"
+        (click)="closeMenu()"
+        [style.transition-delay]="menuOpen() ? 120 + i * 60 + 'ms' : '0ms'"
+        [attr.tabindex]="menuOpen() ? null : -1"
+      >{{ link.label }}</a>
+    }
+    <a
+      class="btn btn--gold overlay__cta"
+      href="#contato"
+      (click)="closeMenu()"
+      [style.transition-delay]="menuOpen() ? 120 + links.length * 60 + 'ms' : '0ms'"
+      [attr.tabindex]="menuOpen() ? null : -1"
+    >Agendar Consulta</a>
+  </nav>
+</div>

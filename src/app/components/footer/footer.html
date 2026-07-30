@@ -1,0 +1,78 @@
+<footer class="footer" id="contato">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a class="footer__logo" href="#inicio" aria-label="Nafs & Vida — voltar ao início">
+        <app-logo tone="dark" />
+      </a>
+      <p>
+        Unimos ciência e fé para promover saúde mental com propósito e
+        conexão com Allah.
+      </p>
+    </div>
+
+    <nav class="footer__col" aria-label="Navegação do rodapé">
+      <h2 class="footer__title">Navegação</h2>
+      <ul>
+        @for (link of navLinks; track link.label) {
+          <li><a [href]="link.href">{{ link.label }}</a></li>
+        }
+      </ul>
+    </nav>
+
+    <div class="footer__col">
+      <h2 class="footer__title">Serviços</h2>
+      <ul>
+        @for (link of serviceLinks; track link.label) {
+          <li><a [href]="link.href">{{ link.label }}</a></li>
+        }
+      </ul>
+    </div>
+
+    <div class="footer__col footer__contact">
+      <h2 class="footer__title">Contato</h2>
+      <ul>
+        <li>
+          <a href="tel:+5511999999999">
+            <app-icon name="phone" style="width: 17px; height: 17px" />
+            (11) 99999-9999
+          </a>
+        </li>
+        <li>
+          <a href="mailto:contato@nafsvida.com.br">
+            <app-icon name="mail" style="width: 17px; height: 17px" />
+            contato@nafsvida.com.br
+          </a>
+        </li>
+        <li>
+          <span>
+            <app-icon name="pin" style="width: 17px; height: 17px" />
+            São Paulo - SP
+          </span>
+        </li>
+      </ul>
+
+      <div class="footer__social">
+        <a href="#" aria-label="Instagram da Nafs & Vida">
+          <app-icon name="instagram" style="width: 18px; height: 18px" />
+        </a>
+        <a href="#" aria-label="YouTube da Nafs & Vida">
+          <app-icon name="youtube" style="width: 18px; height: 18px" />
+        </a>
+        <a href="#" aria-label="WhatsApp da Nafs & Vida">
+          <app-icon name="whatsapp" style="width: 18px; height: 18px" />
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__bar">
+    <div class="container footer__bar-inner">
+      <p>&copy; {{ year }} Nafs &amp; Vida. Todos os direitos reservados.</p>
+      <nav aria-label="Links legais">
+        <a href="#">Privacidade</a>
+        <span aria-hidden="true">|</span>
+        <a href="#">Termos de Uso</a>
+      </nav>
+    </div>
+  </div>
+</footer>

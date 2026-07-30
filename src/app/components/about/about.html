@@ -1,0 +1,40 @@
+<section class="section about" id="sobre" aria-labelledby="about-title">
+  <div class="container about__grid">
+    <figure class="about__media" appReveal>
+      <img
+        src="assets/janela.png"
+        alt="Arco islâmico com moldura dourada e vista serena de uma mesquita"
+        loading="lazy"
+      />
+    </figure>
+
+    <div class="about__content">
+      <span class="eyebrow" appReveal>Sobre a Nafs &amp; Vida</span>
+      <h2 id="about-title" appReveal [appRevealDelay]="100">
+        Um espaço onde ciência e fé caminham juntas
+      </h2>
+      <p appReveal [appRevealDelay]="200">
+        A Nafs &amp; Vida nasce do encontro entre a psicologia contemporânea e a
+        sabedoria da tradição islâmica. Acreditamos que cuidar da saúde emocional
+        não está separado da vida espiritual — pelo contrário: é parte dela.
+      </p>
+      <p appReveal [appRevealDelay]="300">
+        Aqui, você encontra um espaço de escuta profunda, ética profissional e
+        respeito à sua fé, para atravessar dores, compreender a si mesmo e
+        reconstruir equilíbrio — por dentro e por fora.
+      </p>
+      <ul class="about__points">
+        @for (point of points; track point; let i = $index) {
+          <li appReveal [appRevealDelay]="380 + i * 90">
+            <app-icon name="star" style="width: 16px; height: 16px" aria-hidden="true" />
+            {{ point }}
+          </li>
+        }
+      </ul>
+      <a class="link-more about__link" href="#servicos" appReveal [appRevealDelay]="650">
+        Conheça nossos serviços
+        <app-icon name="chevron" style="width: 15px; height: 15px" />
+      </a>
+    </div>
+  </div>
+</section>

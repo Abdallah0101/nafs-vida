@@ -1,0 +1,15 @@
+<section class="values" aria-label="Valores da Nafs & Vida">
+  <div class="container">
+    <ol class="values__grid">
+      @for (value of values; track value.title; let i = $index) {
+        <li class="values__item" appReveal [appRevealDelay]="i * 110">
+          <span class="values__icon" aria-hidden="true">
+            <app-icon [name]="value.icon" />
+          </span>
+          <h2 class="values__title">{{ value.title }}</h2>
+          <p class="values__text">{{ value.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>
