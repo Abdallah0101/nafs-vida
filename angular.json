@@ -77,6 +77,13 @@
                 }
               ],
               "outputHashing": "all",
+              "optimization": {
+                "styles": {
+                  /* Gera <link rel="stylesheet"> simples — o truque
+                     media="print" onload="..." é bloqueado pela CSP */
+                  "inlineCritical": false
+                }
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
