@@ -1,10 +1,6 @@
 import { Component, HostListener, signal } from '@angular/core';
-import { LogoComponent } from '../../shared/logo/logo';
-
-interface NavLink {
-  label: string;
-  href: string;
-}
+import { NAV_LINKS } from '@core/content/site-content';
+import { LogoComponent } from '@shared/ui/logo/logo';
 
 @Component({
   selector: 'app-navbar',
@@ -13,14 +9,7 @@ interface NavLink {
   styleUrl: './navbar.scss'
 })
 export class NavbarComponent {
-  protected readonly links: NavLink[] = [
-    { label: 'Início', href: '#inicio' },
-    { label: 'Sobre', href: '#sobre' },
-    { label: 'Serviços', href: '#servicos' },
-    { label: 'Recursos', href: '#recursos' },
-    { label: 'Blog', href: '#blog' },
-    { label: 'Contato', href: '#contato' }
-  ];
+  protected readonly links = NAV_LINKS;
 
   protected readonly menuOpen = signal(false);
   protected readonly scrolled = signal(false);

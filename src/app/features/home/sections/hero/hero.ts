@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IconComponent } from '../../shared/icon/icon';
-import { RevealDirective } from '../../shared/reveal.directive';
+import { RevealDirective } from '@shared/directives/reveal.directive';
+import { IconComponent } from '@shared/ui/icon/icon';
 
 @Component({
   selector: 'app-hero',

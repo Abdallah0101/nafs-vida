@@ -38,6 +38,14 @@ testem.log
 /typings
 __screenshots__/
 
+# Segredos e configuração local — NUNCA commitar
+.env
+.env.*
+!.env.example
+!.env.sample
+*.pem
+*.key
+
 # System files
 .DS_Store
 Thumbs.db

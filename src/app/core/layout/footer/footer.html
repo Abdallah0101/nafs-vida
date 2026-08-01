@@ -32,35 +32,31 @@
       <h2 class="footer__title">Contato</h2>
       <ul>
         <li>
-          <a href="tel:+5511999999999">
+          <a [href]="contact.phoneHref">
             <app-icon name="phone" style="width: 17px; height: 17px" />
-            (11) 99999-9999
+            {{ contact.phoneDisplay }}
           </a>
         </li>
         <li>
-          <a href="mailto:contato@nafsvida.com.br">
+          <a [href]="'mailto:' + contact.email">
             <app-icon name="mail" style="width: 17px; height: 17px" />
-            contato@nafsvida.com.br
+            {{ contact.email }}
           </a>
         </li>
         <li>
           <span>
             <app-icon name="pin" style="width: 17px; height: 17px" />
-            São Paulo - SP
+            {{ contact.location }}
           </span>
         </li>
       </ul>
 
       <div class="footer__social">
-        <a href="#" aria-label="Instagram da Nafs & Vida">
-          <app-icon name="instagram" style="width: 18px; height: 18px" />
-        </a>
-        <a href="#" aria-label="YouTube da Nafs & Vida">
-          <app-icon name="youtube" style="width: 18px; height: 18px" />
-        </a>
-        <a href="#" aria-label="WhatsApp da Nafs & Vida">
-          <app-icon name="whatsapp" style="width: 18px; height: 18px" />
-        </a>
+        @for (social of socials; track social.label) {
+          <a [href]="social.href" [attr.aria-label]="social.label">
+            <app-icon [name]="social.icon" style="width: 18px; height: 18px" />
+          </a>
+        }
       </div>
     </div>
   </div>
