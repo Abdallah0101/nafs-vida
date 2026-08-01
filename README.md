@@ -89,6 +89,10 @@ Arquivos `.env*` estão no `.gitignore` para configuração local futura.
   **não funciona** via `<meta>` (é ignorado pelos navegadores) — configurar
   como header HTTP (`frame-ancestors 'none'` / `X-Frame-Options: DENY`) quando
   houver servidor próprio; no GitHub Pages não é possível definir headers.
+- **CSP × build Angular**: `optimization.styles.inlineCritical` está **off**
+  no `angular.json`. O carregador padrão do Angular (`media="print"
+  onload="this.media='all'"`) usa inline event handler, que a CSP bloqueia —
+  deixou o site sem CSS em produção uma vez; não reativar sem ajustar a CSP.
 - **`referrer`**: `strict-origin-when-cross-origin`.
 - **Templates Angular**: interpolação `{{ }}` já escapa HTML por padrão.
   Nunca usar `bypassSecurityTrust*` sem sanitização explícita.
