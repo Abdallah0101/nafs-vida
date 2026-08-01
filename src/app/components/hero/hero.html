@@ -1,26 +1,21 @@
 <section class="hero" id="inicio" aria-labelledby="hero-title">
-  <div class="hero__visual">
-    <img
-      class="hero__img"
-      src="assets/hero.jpg"
-      alt="Sala serena com arco islâmico, poltrona bordô, lanterna dourada e vista suave de uma mesquita"
-      width="1536"
-      height="1197"
-      fetchpriority="high"
-    />
-  </div>
+  <span class="hero__arabic" aria-hidden="true">نَفْس</span>
 
   <div class="container hero__grid">
     <div class="hero__copy">
-      <h1 id="hero-title" appReveal>
+      <span class="hero__eyebrow" appReveal>
+        <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+        Psicologia Islâmica · Online
+      </span>
+      <h1 id="hero-title" appReveal [appRevealDelay]="90">
         Cuidar da mente<br />
         é um <em>ato de fé</em>
       </h1>
-      <p class="hero__lead" appReveal [appRevealDelay]="140">
+      <p class="hero__lead" appReveal [appRevealDelay]="210">
         A psicologia e o Islã caminham juntos no propósito de trazer cura,
         equilíbrio e propósito para a vida.
       </p>
-      <div class="hero__actions" appReveal [appRevealDelay]="280">
+      <div class="hero__actions" appReveal [appRevealDelay]="330">
         <a class="btn btn--primary" href="#contato">
           Agendar Consulta
           <app-icon name="calendar" style="width: 17px; height: 17px" />
@@ -29,6 +24,33 @@
           Saiba mais
           <app-icon name="chevron" style="width: 15px; height: 15px" />
         </a>
+      </div>
+      <ul class="hero__trust" appReveal [appRevealDelay]="450">
+        <li>
+          <app-icon name="shield" style="width: 16px; height: 16px" aria-hidden="true" />
+          Sigilo profissional garantido
+        </li>
+        <li>
+          <app-icon name="globe" style="width: 16px; height: 16px" aria-hidden="true" />
+          Online para todo o Brasil
+        </li>
+        <li>
+          <app-icon name="check" style="width: 16px; height: 16px" aria-hidden="true" />
+          Baseada em evidências
+        </li>
+      </ul>
+    </div>
+
+    <div class="hero__visual" appReveal [appRevealDelay]="180">
+      <div class="hero__arch">
+        <img
+          class="hero__img"
+          src="assets/hero.jpg"
+          alt="Sala serena com arco islâmico, poltrona bordô, lanterna dourada e vista suave de uma mesquita"
+          width="1536"
+          height="1197"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </div>

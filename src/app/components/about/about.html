@@ -6,6 +6,15 @@
         alt="Arco islâmico com moldura dourada e vista serena de uma mesquita"
         loading="lazy"
       />
+      <figcaption class="about__badge">
+        <span class="about__badge-icon" aria-hidden="true">
+          <app-icon name="globe" />
+        </span>
+        <span class="about__badge-text">
+          <strong>100% online</strong>
+          <small>para todo o Brasil</small>
+        </span>
+      </figcaption>
     </figure>
 
     <div class="about__content">
@@ -26,7 +35,9 @@
       <ul class="about__points">
         @for (point of points; track point; let i = $index) {
           <li appReveal [appRevealDelay]="380 + i * 90">
-            <app-icon name="star" style="width: 16px; height: 16px" aria-hidden="true" />
+            <span class="about__check" aria-hidden="true">
+              <app-icon name="check" />
+            </span>
             {{ point }}
           </li>
         }

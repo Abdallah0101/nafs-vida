@@ -1,38 +1,88 @@
 .hero {
   position: relative;
   overflow: clip;
+  background:
+    radial-gradient(46% 58% at 86% 10%, rgba(176, 141, 87, 0.18), transparent 62%),
+    radial-gradient(38% 42% at 4% 88%, rgba(94, 20, 40, 0.055), transparent 60%),
+    linear-gradient(180deg, var(--color-cream) 0%, var(--color-background) 78%);
+}
+
+/* Marca d'água em caligrafia árabe: "nafs" (نَفْس) */
+.hero__arabic {
+  position: absolute;
+  top: 3%;
+  left: -1.5%;
+  font-family: var(--font-arabic);
+  font-size: clamp(11rem, 19vw, 18rem);
+  line-height: 1;
+  color: var(--color-primary);
+  opacity: 0.05;
+  pointer-events: none;
+  user-select: none;
 }
 
 .hero__grid {
   position: relative;
   z-index: 1;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
   align-items: center;
-  min-height: max(600px, calc(100svh - var(--nav-h) - 3rem));
-  padding-block: clamp(3rem, 6vw, 5rem);
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+  min-height: max(620px, calc(100svh - var(--nav-h)));
+  /* Respiro inferior para o card de valores sobrepor o hero */
+  padding-block: clamp(3rem, 5vw, 4.5rem) clamp(7.5rem, 11vw, 9.5rem);
 }
 
 .hero__copy {
-  max-width: 480px;
+  max-width: 560px;
 
   h1 {
-    font-size: clamp(2.7rem, 5.2vw, 4.4rem);
+    font-size: clamp(2.9rem, 5.4vw, 4.6rem);
     font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: -0.01em;
+    line-height: 1.06;
+    letter-spacing: -0.015em;
 
     em {
       font-style: italic;
       font-weight: 500;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
   }
 }
 
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1.05rem;
+  margin-bottom: 1.7rem;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(176, 141, 87, 0.42);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  backdrop-filter: blur(6px);
+}
+
+.hero__eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gradient-gold);
+  box-shadow: 0 0 0 3px rgba(176, 141, 87, 0.22);
+}
+
 .hero__lead {
-  margin-top: 1.7rem;
-  max-width: 38ch;
-  font-size: 1.07rem;
-  line-height: 1.7;
+  margin-top: 1.6rem;
+  max-width: 42ch;
+  font-size: 1.09rem;
+  line-height: 1.72;
   color: var(--color-text-muted);
 }
 
@@ -41,37 +91,72 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 1.1rem 1.9rem;
-  margin-top: 2.7rem;
+  margin-top: 2.5rem;
 }
+
+/* Selos de confiança */
+.hero__trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.6rem;
+  margin-top: 2.6rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(176, 141, 87, 0.3);
+
+  li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.83rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+
+    app-icon {
+      color: var(--color-gold-deep);
+    }
+  }
+}
+
+/* ---------- Visual em arco (mihrab) ---------- */
 
 .hero__visual {
+  position: relative;
+  justify-self: end;
+  width: min(100%, 560px);
+}
+
+/* Moldura dourada deslocada, eco do arco */
+.hero__visual::before {
+  content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 55%;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 45%);
-  mask-image: linear-gradient(to right, transparent 0%, #000 45%);
+  inset: 0;
+  transform: translate(18px, 18px);
+  border: 1px solid rgba(176, 141, 87, 0.55);
+  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+  pointer-events: none;
 }
 
+.hero__arch {
+  overflow: hidden;
+  border-radius: 999px 999px var(--radius-lg) var(--radius-lg);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Altura automática: a foto aparece inteira em qualquer largura,
+   sem corte — o arco acompanha a proporção natural da imagem */
 .hero__img {
+  display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 65% center;
+  height: auto;
 }
 
-/* ---------- Tablet e mobile: empilhado, imagem quase inteira ---------- */
+/* ---------- Tablet e mobile: empilhado ---------- */
 
 @media (max-width: 1024px) {
-  .hero {
-    display: flex;
-    flex-direction: column;
-  }
-
   .hero__grid {
+    grid-template-columns: 1fr;
     min-height: 0;
-    padding-block: clamp(2.8rem, 7vw, 4rem) 0;
+    padding-block: clamp(2.8rem, 7vw, 4rem) clamp(3.5rem, 7vw, 5rem);
   }
 
   .hero__copy {
@@ -83,16 +168,34 @@
   }
 
   .hero__visual {
-    position: relative;
     order: 2;
-    width: 100%;
-    height: auto;
-    /* 4:3 ≈ proporção da foto (1536×1197): mostra teto, pés da poltrona e detalhes */
-    aspect-ratio: 4 / 3;
-    margin-top: clamp(2.2rem, 5vw, 3.2rem);
+    justify-self: center;
+    width: min(100%, 560px);
+    margin-top: clamp(1.5rem, 4vw, 2.5rem);
   }
 
-  .hero__img {
-    object-position: center;
+  /* Layout empilhado: a marca d'água vai para a direita,
+     preenchendo o espaço vazio ao lado do texto */
+  .hero__arabic {
+    top: 2%;
+    left: auto;
+    right: 2%;
+    font-size: clamp(9rem, 26vw, 14rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__trust {
+    gap: 0.7rem 1.1rem;
+  }
+
+  .hero__eyebrow {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.17em;
+  }
+
+  .hero__visual::before {
+    transform: translate(10px, 10px);
   }
 }

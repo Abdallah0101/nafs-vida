@@ -1,19 +1,32 @@
 <section class="cta pattern-bg pattern-bg--dark" aria-labelledby="cta-title">
-  <div class="container cta__inner">
-    <svg class="cta__star" viewBox="0 0 48 48" fill="none" aria-hidden="true" appReveal>
-      <rect x="11.5" y="11.5" width="25" height="25" />
-      <rect x="11.5" y="11.5" width="25" height="25" transform="rotate(45 24 24)" />
-      <circle cx="24" cy="24" r="2.3" />
-    </svg>
-    <h2 id="cta-title" appReveal [appRevealDelay]="120">
-      Você não precisa enfrentar tudo sozinho.
-    </h2>
-    <p appReveal [appRevealDelay]="240">
-      Buscar ajuda também pode fazer parte de uma jornada de cuidado,
-      equilíbrio e fé.
-    </p>
-    <a class="btn btn--gold" href="#contato" appReveal [appRevealDelay]="360">
-      Agendar Consulta
-    </a>
+  <div class="container">
+    <div class="cta__panel" appReveal>
+      <svg class="cta__star" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <rect x="11.5" y="11.5" width="25" height="25" />
+        <rect x="11.5" y="11.5" width="25" height="25" transform="rotate(45 24 24)" />
+        <circle cx="24" cy="24" r="2.3" />
+      </svg>
+      <h2 id="cta-title" appReveal [appRevealDelay]="120">
+        Você não precisa enfrentar tudo <em>sozinho</em>.
+      </h2>
+      <p class="cta__lead" appReveal [appRevealDelay]="240">
+        Buscar ajuda também pode fazer parte de uma jornada de cuidado,
+        equilíbrio e fé.
+      </p>
+      <div class="cta__actions" appReveal [appRevealDelay]="360">
+        <a class="btn btn--gold" href="#contato">
+          Agendar Consulta
+          <app-icon name="calendar" style="width: 17px; height: 17px" />
+        </a>
+        <a class="btn btn--outline-light" href="#contato">
+          <app-icon name="whatsapp" style="width: 17px; height: 17px" />
+          Falar no WhatsApp
+        </a>
+      </div>
+      <p class="cta__note" appReveal [appRevealDelay]="480">
+        <app-icon name="shield" style="width: 15px; height: 15px" aria-hidden="true" />
+        Atendimento sigiloso, ético e sem julgamentos
+      </p>
+    </div>
   </div>
 </section>

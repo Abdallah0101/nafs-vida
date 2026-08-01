@@ -1,6 +1,7 @@
 <section class="section services" id="servicos" aria-labelledby="services-title">
   <div class="container">
     <header class="section-head" appReveal>
+      <span class="eyebrow">Nossos serviços</span>
       <h2 id="services-title">Como podemos te ajudar</h2>
       <div class="ornament" aria-hidden="true">
         <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
@@ -10,6 +11,7 @@
     <div class="services__grid">
       @for (service of services; track service.title; let i = $index) {
         <article class="card" appReveal [appRevealDelay]="i * 100">
+          <span class="card__num" aria-hidden="true">0{{ i + 1 }}</span>
           <span class="card__icon" aria-hidden="true">
             <app-icon [name]="service.icon" />
           </span>
