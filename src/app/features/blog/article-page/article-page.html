@@ -1,4 +1,8 @@
 <section class="section article">
+  <div class="article__progress" aria-hidden="true">
+    <span [style.width.%]="progress()"></span>
+  </div>
+
   @if (meta(); as post) {
     <article>
       <header class="container article__head">
@@ -8,6 +12,7 @@
         </a>
         <span class="eyebrow">{{ post.category }}</span>
         <h1>{{ post.title }}</h1>
+        <p class="article__lede">{{ post.excerpt }}</p>
         <div class="article__meta">
           <span class="article__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
           <span class="article__byline">
@@ -20,6 +25,9 @@
             <time [attr.datetime]="post.date">{{ post.date | date: "dd 'de' MMMM 'de' y" }}</time>
             · {{ post.readingTime }} min de leitura
           </span>
+        </div>
+        <div class="ornament article__ornament" aria-hidden="true">
+          <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
         </div>
       </header>
 
@@ -38,6 +46,18 @@
           </p>
         } @else {
           <p class="article__status">Carregando artigo…</p>
+        }
+
+        @if (post.reflection) {
+          <aside class="reflection">
+            <span class="reflection__icon" aria-hidden="true">
+              <app-icon name="lantern" />
+            </span>
+            <div class="reflection__content">
+              <strong>Para refletir</strong>
+              <p>{{ post.reflection }}</p>
+            </div>
+          </aside>
         }
 
         @if (post.youtube) {

@@ -29,6 +29,8 @@
   --font-serif: 'Cormorant Garamond', 'Times New Roman', serif;
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-arabic: 'Amiri', serif;
+  /* Serifada de leitura — corpo de artigos (texto longo) */
+  --font-reading: 'Lora', Georgia, serif;
 
   /* Layout */
   --container: 1180px;
@@ -384,5 +386,165 @@ footer[id] {
   *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- Tipografia de artigos (Markdown via [innerHTML]) ----------
+   Precisa ser GLOBAL: o HTML injetado pelo BlogService não recebe os
+   atributos de escopo de componente do Angular (view encapsulation). */
+
+.prose {
+  font-family: var(--font-reading);
+  font-size: 1.12rem;
+  line-height: 1.8;
+  text-wrap: pretty;
+
+  /* Capitular dourada na abertura do artigo */
+  > p:first-of-type::first-letter {
+    float: left;
+    padding: 0.35rem 0.7rem 0 0;
+    font-family: var(--font-serif);
+    font-size: 3.9rem;
+    font-weight: 600;
+    line-height: 0.78;
+    color: var(--color-primary);
+  }
+
+  h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-top: 2.8rem;
+    font-size: clamp(1.6rem, 2.7vw, 2rem);
+
+    /* Filete dourado editorial */
+    &::before {
+      content: '';
+      flex: none;
+      width: 28px;
+      height: 2px;
+      background: var(--gradient-gold);
+      border-radius: 2px;
+    }
+  }
+
+  h3 {
+    margin-top: 2.2rem;
+    font-size: clamp(1.28rem, 2.1vw, 1.55rem);
+  }
+
+  p {
+    margin-top: 1.3rem;
+  }
+
+  strong {
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    text-decoration-color: rgba(138, 58, 77, 0.45);
+    text-underline-offset: 3px;
+    transition: text-decoration-color var(--transition);
+
+    &:hover {
+      text-decoration-color: var(--color-secondary);
+    }
+  }
+
+  ul,
+  ol {
+    margin-top: 1.3rem;
+    padding-left: 1.4rem;
+
+    li {
+      line-height: 1.75;
+    }
+
+    li + li {
+      margin-top: 0.55rem;
+    }
+
+    li::marker {
+      color: var(--color-gold-deep);
+    }
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  /* Citação em estilo revista: aspas grandes centralizadas */
+  blockquote {
+    position: relative;
+    margin: 2.8rem 0;
+    padding: 2.6rem clamp(1rem, 4vw, 2.5rem) 0;
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.2vw, 1.5rem);
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--color-primary);
+
+    &::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-serif);
+      font-size: 3.6rem;
+      line-height: 1;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    p {
+      margin-top: 0;
+    }
+
+    p + p {
+      margin-top: 0.7rem;
+      font-size: 0.82em;
+      color: var(--color-text-muted);
+    }
+  }
+
+  img {
+    margin-top: 1.8rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  hr {
+    margin: 2.8rem 0;
+    border: 0;
+    text-align: center;
+
+    &::after {
+      content: '◆ ◆ ◆';
+      font-size: 0.55rem;
+      letter-spacing: 1.1rem;
+      padding-left: 1.1rem;
+      color: var(--color-gold);
+    }
+  }
+
+  /* Marca de fim de artigo */
+  &::after {
+    content: '◆';
+    display: block;
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--color-gold);
   }
 }

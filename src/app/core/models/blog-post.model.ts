@@ -19,6 +19,8 @@ export interface BlogPostMeta {
   url: string;
   cover?: string;
   youtube?: string;
+  /** Box "Para refletir" exibido ao final do artigo (opcional). */
+  reflection?: string;
 }
 
 export interface BlogIndex {

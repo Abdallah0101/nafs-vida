@@ -1,3 +1,21 @@
+/* Barra de progresso de leitura (fixa no topo) */
+.article__progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  height: 3px;
+  pointer-events: none;
+
+  span {
+    display: block;
+    height: 100%;
+    background: var(--gradient-gold);
+    transition: width 120ms linear;
+  }
+}
+
 .article__head {
   max-width: 780px;
   margin-inline: auto;
@@ -5,8 +23,9 @@
 
   h1 {
     margin-top: 1rem;
-    font-size: clamp(2.1rem, 4.4vw, 3.3rem);
-    line-height: 1.15;
+    font-size: clamp(2.2rem, 4.6vw, 3.5rem);
+    line-height: 1.12;
+    text-wrap: balance;
   }
 }
 
@@ -16,13 +35,25 @@
   margin-bottom: 2rem;
 }
 
+/* Lede: o resumo do artigo em destaque editorial */
+.article__lede {
+  margin: 1.4rem auto 0;
+  max-width: 58ch;
+  font-family: var(--font-reading);
+  font-size: 1.13rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  text-wrap: pretty;
+}
+
 .article__meta {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.8rem 1rem;
-  margin-top: 1.6rem;
+  margin-top: 1.8rem;
 }
 
 .article__avatar {
@@ -61,6 +92,10 @@
   color: var(--color-text-muted);
 }
 
+.article__ornament {
+  margin-top: 2rem;
+}
+
 .article__cover {
   max-width: 880px;
   margin: clamp(2rem, 4vw, 3rem) auto 0;
@@ -73,7 +108,7 @@
 }
 
 .article__body {
-  max-width: 760px;
+  max-width: 720px;
   margin-top: clamp(2rem, 4vw, 3rem);
 }
 
@@ -83,89 +118,57 @@
   color: var(--color-text-muted);
 }
 
-/* ---------- Tipografia do artigo (Markdown renderizado) ---------- */
+/* A tipografia do conteúdo Markdown (.prose) mora em styles.scss:
+   o HTML injetado via [innerHTML] não recebe os atributos de escopo
+   do componente, então regras descendentes só funcionam globais. */
 
-.prose {
-  font-size: 1.05rem;
+/* ---------- Box "Para refletir" ---------- */
 
-  h2 {
-    margin-top: 2.4rem;
-    font-size: clamp(1.55rem, 2.6vw, 1.95rem);
+.reflection {
+  display: flex;
+  gap: 1.1rem;
+  margin-top: 2.8rem;
+  padding: 1.5rem 1.6rem;
+  background: linear-gradient(160deg, var(--color-cream), var(--color-sand));
+  border: 1px solid rgba(176, 141, 87, 0.45);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.reflection__icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  box-shadow: 0 12px 20px -12px rgba(94, 20, 40, 0.55);
+  color: var(--color-gold-soft);
+
+  app-icon {
+    width: 21px;
+    height: 21px;
   }
+}
 
-  h3 {
-    margin-top: 2rem;
-    font-size: clamp(1.25rem, 2vw, 1.5rem);
+.reflection__content {
+  strong {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--color-gold-deep);
   }
 
   p {
-    margin-top: 1.15rem;
-    line-height: 1.78;
-  }
-
-  strong {
-    font-weight: 600;
-    color: var(--color-primary);
-  }
-
-  a {
-    color: var(--color-secondary);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  ul,
-  ol {
-    margin-top: 1.15rem;
-    padding-left: 1.4rem;
-
-    li {
-      line-height: 1.7;
-    }
-
-    li + li {
-      margin-top: 0.45rem;
-    }
-  }
-
-  ul {
-    list-style: disc;
-  }
-
-  ol {
-    list-style: decimal;
-  }
-
-  blockquote {
-    margin: 2rem 0;
-    padding: 1.2rem 1.5rem;
-    background: var(--color-cream);
-    border-left: 3px solid var(--color-gold);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    font-family: var(--font-serif);
-    font-size: 1.16rem;
+    margin-top: 0.55rem;
+    font-family: var(--font-reading);
+    font-size: 1.02rem;
     font-style: italic;
-    line-height: 1.6;
-    color: var(--color-primary);
-
-    p {
-      margin-top: 0;
-    }
-
-    p + p {
-      margin-top: 0.6rem;
-    }
-  }
-
-  img {
-    margin-top: 1.6rem;
-    border-radius: var(--radius-lg);
-  }
-
-  hr {
-    margin: 2.4rem 0;
-    border: 0;
-    border-top: 1px solid var(--color-line);
+    line-height: 1.65;
+    color: var(--color-dark);
   }
 }
 
@@ -231,5 +234,9 @@
 @media (max-width: 640px) {
   .article__related-grid {
     grid-template-columns: 1fr;
+  }
+
+  .reflection {
+    padding: 1.2rem 1.1rem;
   }
 }

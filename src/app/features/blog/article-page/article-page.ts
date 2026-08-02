@@ -1,4 +1,4 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
+import { Component, HostListener, computed, effect, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { DatePipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -35,6 +35,9 @@ export class ArticlePageComponent {
 
   protected readonly html = signal('');
   protected readonly htmlError = signal(false);
+
+  /** Progresso de leitura (0–100) para a barra no topo. */
+  protected readonly progress = signal(0);
 
   private loadedSlug = '';
 
@@ -82,5 +85,11 @@ export class ArticlePageComponent {
     } catch {
       this.htmlError.set(true);
     }
+  }
+
+  @HostListener('window:scroll')
+  protected onScrollProgress(): void {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    this.progress.set(max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0);
   }
 }
