@@ -6,11 +6,14 @@
   @if (meta(); as post) {
     <article>
       <header class="container article__head">
-        <a class="link-more article__back" routerLink="/blog">
-          <app-icon name="chevron" style="width: 15px; height: 15px; transform: rotate(180deg)" />
-          Voltar para o blog
-        </a>
-        <span class="eyebrow">{{ post.category }}</span>
+        <nav class="article__breadcrumb" aria-label="Trilha de navegação">
+          <a routerLink="/">Início</a>
+          <span aria-hidden="true">›</span>
+          <a routerLink="/blog">Blog</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{{ post.category }}</span>
+        </nav>
+        <span class="article__cat">{{ post.category }}</span>
         <h1>{{ post.title }}</h1>
         <p class="article__lede">{{ post.excerpt }}</p>
         <div class="article__meta">
@@ -38,6 +41,21 @@
       }
 
       <div class="container article__body">
+        @if (toc().length >= 3) {
+          <nav class="toc" aria-label="Sumário do artigo">
+            <strong>Neste artigo</strong>
+            <ol>
+              @for (item of toc(); track item.index) {
+                <li>
+                  <a href="#" (click)="scrollToSection($event, item.index)">
+                    {{ item.text }}
+                  </a>
+                </li>
+              }
+            </ol>
+          </nav>
+        }
+
         @if (html()) {
           <div class="prose" [innerHTML]="html()"></div>
         } @else if (htmlError()) {
@@ -47,6 +65,15 @@
         } @else {
           <p class="article__status">Carregando artigo…</p>
         }
+
+        <section class="author" aria-label="Sobre o autor">
+          <span class="article__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
+          <div class="author__info">
+            <small>Escrito por</small>
+            <strong>{{ post.author }}</strong>
+            <p>{{ post.authorRole || 'Nafs & Vida — Psicologia Islâmica' }}</p>
+          </div>
+        </section>
 
         @if (post.reflection) {
           <aside class="reflection">
@@ -74,6 +101,15 @@
             }
           </ul>
         }
+
+        <section class="share pattern-bg pattern-bg--dark" aria-label="Compartilhar este artigo">
+          <span class="share__heart" aria-hidden="true">
+            <app-icon name="heart" />
+          </span>
+          <h2>Gostou deste artigo?</h2>
+          <p>Compartilhe com quem você ama — o bem compartilhado é bem multiplicado.</p>
+          <app-share-buttons [title]="post.title" />
+        </section>
       </div>
 
       @if (related().length > 0) {

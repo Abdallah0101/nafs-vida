@@ -9,5 +9,7 @@ export const environment = {
   /** TODO: substituir pela URL real da API quando o backend estiver no ar. */
   apiUrl: 'https://api.nafsvida.com.br/api',
   /** Repositório público de conteúdo (artigos .md + posts.json). */
-  contentBaseUrl: 'https://raw.githubusercontent.com/Abdallah0101/nafs-vida-content/main'
+  contentBaseUrl: 'https://raw.githubusercontent.com/Abdallah0101/nafs-vida-content/main',
+  /** URL pública do site (meta tags sociais). */
+  siteUrl: 'https://abdallah0101.github.io/nafs-vida'
 } as const;

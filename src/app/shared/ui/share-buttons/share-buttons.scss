@@ -1,0 +1,63 @@
+.share__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+
+  li {
+    position: relative;
+  }
+}
+
+.share__btn {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  background: rgba(246, 239, 228, 0.06);
+  border: 1px solid rgba(176, 141, 87, 0.5);
+  border-radius: 50%;
+  color: var(--color-gold-soft);
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), transform var(--transition);
+
+  app-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  &:hover {
+    background: var(--gradient-gold);
+    border-color: transparent;
+    color: var(--color-primary-deep);
+    transform: translateY(-3px);
+  }
+}
+
+.share__btn--copied {
+  background: var(--gradient-gold);
+  border-color: transparent;
+  color: var(--color-primary-deep);
+}
+
+.share__feedback {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  padding: 0.4rem 0.8rem;
+  background: var(--color-primary-deep);
+  border: 1px solid rgba(176, 141, 87, 0.5);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  color: var(--color-cream);
+  opacity: 0;
+  transform: translateX(-50%) translateY(-4px);
+  transition: opacity var(--transition), transform var(--transition);
+  pointer-events: none;
+}
+
+.share__feedback--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

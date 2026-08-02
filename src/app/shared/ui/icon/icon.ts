@@ -23,7 +23,11 @@ export type IconName =
   | 'globe'
   | 'check'
   | 'arrow-up'
-  | 'rate';
+  | 'rate'
+  | 'facebook'
+  | 'x'
+  | 'telegram'
+  | 'link';
 
 /**
  * Ícone linear da identidade Nafs & Vida.

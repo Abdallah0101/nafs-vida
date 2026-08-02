@@ -11,5 +11,7 @@ export const environment = {
   /** Base URL da futura API (backend local). */
   apiUrl: 'http://localhost:3000/api',
   /** Repositório público de conteúdo (artigos .md + posts.json). */
-  contentBaseUrl: 'https://raw.githubusercontent.com/Abdallah0101/nafs-vida-content/main'
+  contentBaseUrl: 'https://raw.githubusercontent.com/Abdallah0101/nafs-vida-content/main',
+  /** URL pública do site (meta tags sociais). */
+  siteUrl: 'http://localhost:4317'
 } as const;

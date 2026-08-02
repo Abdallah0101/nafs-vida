@@ -1,0 +1,29 @@
+<ul class="share__buttons">
+  @for (channel of channels; track channel.name) {
+    <li>
+      <a
+        class="share__btn"
+        [href]="shareUrl(channel)"
+        target="_blank"
+        rel="noopener noreferrer"
+        [attr.aria-label]="channel.label"
+      >
+        <app-icon [name]="channel.name" />
+      </a>
+    </li>
+  }
+  <li>
+    <button
+      type="button"
+      class="share__btn share__btn--copy"
+      [class.share__btn--copied]="copied()"
+      (click)="copyLink()"
+      [attr.aria-label]="copied() ? 'Link copiado!' : 'Copiar link do artigo'"
+    >
+      <app-icon [name]="copied() ? 'check' : 'link'" />
+    </button>
+    <span class="share__feedback" [class.share__feedback--visible]="copied()" role="status">
+      Link copiado!
+    </span>
+  </li>
+</ul>

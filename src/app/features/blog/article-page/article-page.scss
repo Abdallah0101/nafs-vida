@@ -29,10 +29,47 @@
   }
 }
 
-.article__back {
+.article__breadcrumb {
   display: flex;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 1.8rem;
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+
+  a {
+    text-decoration: none;
+    transition: color var(--transition);
+
+    &:hover {
+      color: var(--color-gold-deep);
+    }
+  }
+
+  span[aria-hidden='true'] {
+    color: var(--color-gold);
+  }
+
+  span[aria-current='page'] {
+    color: var(--color-gold-deep);
+    font-weight: 500;
+  }
+}
+
+/* Categoria em pill dourada */
+.article__cat {
+  display: inline-block;
+  padding: 0.5rem 1.05rem;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(176, 141, 87, 0.42);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
 }
 
 /* Lede: o resumo do artigo em destaque editorial */
@@ -121,6 +158,134 @@
 /* A tipografia do conteúdo Markdown (.prose) mora em styles.scss:
    o HTML injetado via [innerHTML] não recebe os atributos de escopo
    do componente, então regras descendentes só funcionam globais. */
+
+/* ---------- Sumário "Neste artigo" ---------- */
+
+.toc {
+  margin: 0 0 2.6rem;
+  padding: 1.4rem 1.6rem;
+  background: linear-gradient(160deg, var(--color-cream), var(--color-sand));
+  border: 1px solid rgba(176, 141, 87, 0.4);
+  border-radius: var(--radius-lg);
+
+  strong {
+    display: block;
+    margin-bottom: 0.8rem;
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--color-gold-deep);
+  }
+
+  ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-left: 1.3rem;
+    list-style: decimal;
+
+    li::marker {
+      font-size: 0.85rem;
+      color: var(--color-gold-deep);
+    }
+
+    a {
+      font-size: 0.93rem;
+      text-decoration: none;
+      color: var(--color-dark);
+      transition: color var(--transition);
+
+      &:hover {
+        color: var(--color-secondary);
+      }
+    }
+  }
+}
+
+/* ---------- Caixa do autor ---------- */
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 1.4rem 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.author__info {
+  line-height: 1.4;
+
+  small {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-gold-deep);
+  }
+
+  strong {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+  }
+
+  p {
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+}
+
+/* ---------- Card de compartilhamento ---------- */
+
+.share {
+  margin-top: 3rem;
+  padding: clamp(2.2rem, 5vw, 3rem) clamp(1.4rem, 4vw, 2.5rem);
+  background:
+    radial-gradient(60% 90% at 85% 0%, rgba(176, 141, 87, 0.18), transparent 60%),
+    linear-gradient(150deg, var(--color-primary-deep), var(--color-primary) 75%);
+  border: 1px solid rgba(176, 141, 87, 0.4);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lift);
+  text-align: center;
+  color: var(--color-cream);
+
+  h2 {
+    font-size: clamp(1.5rem, 2.8vw, 1.9rem);
+    color: var(--color-cream);
+  }
+
+  p {
+    margin: 0.7rem auto 1.8rem;
+    max-width: 42ch;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(246, 239, 228, 0.75);
+  }
+}
+
+.share__heart {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 1.1rem;
+  background: rgba(176, 141, 87, 0.14);
+  border: 1px solid rgba(176, 141, 87, 0.45);
+  border-radius: 50%;
+  color: var(--color-gold-soft);
+
+  app-icon {
+    width: 23px;
+    height: 23px;
+  }
+}
 
 /* ---------- Box "Para refletir" ---------- */
 
