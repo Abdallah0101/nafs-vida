@@ -21,6 +21,8 @@ export interface BlogPostMeta {
   youtube?: string;
   /** Box "Para refletir" exibido ao final do artigo (opcional). */
   reflection?: string;
+  /** Foto do autor em authors/ (opcional; sem ela, avatar com iniciais). */
+  authorPhoto?: string;
 }
 
 export interface BlogIndex {

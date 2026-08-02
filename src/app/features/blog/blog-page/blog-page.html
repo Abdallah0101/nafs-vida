@@ -27,7 +27,7 @@
             type="button"
             class="chip"
             [class.chip--active]="selectedCategory() === category"
-            (click)="selectedCategory.set(category)"
+            (click)="selectCategory(category)"
           >
             {{ category }}
           </button>
@@ -36,10 +36,44 @@
 
       @if (filtered().length > 0) {
         <div class="blog-page__grid">
-          @for (post of filtered(); track post.slug) {
+          @for (post of pageItems(); track post.slug) {
             <app-post-card [post]="post" />
           }
         </div>
+
+        @if (totalPages() > 1) {
+          <nav class="pager" aria-label="Paginação do blog">
+            <button
+              type="button"
+              class="pager__btn"
+              [disabled]="currentPage() === 1"
+              (click)="goToPage(currentPage() - 1)"
+              aria-label="Página anterior"
+            >
+              <app-icon name="chevron" style="width: 15px; height: 15px; transform: rotate(180deg)" />
+            </button>
+            @for (page of pages(); track page) {
+              <button
+                type="button"
+                class="pager__btn pager__num"
+                [class.pager__num--active]="page === currentPage()"
+                [attr.aria-current]="page === currentPage() ? 'page' : null"
+                (click)="goToPage(page)"
+              >
+                {{ page }}
+              </button>
+            }
+            <button
+              type="button"
+              class="pager__btn"
+              [disabled]="currentPage() === totalPages()"
+              (click)="goToPage(currentPage() + 1)"
+              aria-label="Próxima página"
+            >
+              <app-icon name="chevron" style="width: 15px; height: 15px" />
+            </button>
+          </nav>
+        }
       } @else {
         <p class="blog-page__status">Nenhum artigo nesta categoria ainda.</p>
       }

@@ -17,7 +17,11 @@
         <h1>{{ post.title }}</h1>
         <p class="article__lede">{{ post.excerpt }}</p>
         <div class="article__meta">
-          <span class="article__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
+          @if (authorPhotoUrl(); as photo) {
+            <img class="article__avatar article__avatar--photo" [src]="photo" [alt]="post.author" />
+          } @else {
+            <span class="article__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
+          }
           <span class="article__byline">
             <strong>{{ post.author }}</strong>
             @if (post.authorRole) {
@@ -65,15 +69,6 @@
         } @else {
           <p class="article__status">Carregando artigo…</p>
         }
-
-        <section class="author" aria-label="Sobre o autor">
-          <span class="article__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
-          <div class="author__info">
-            <small>Escrito por</small>
-            <strong>{{ post.author }}</strong>
-            <p>{{ post.authorRole || 'Nafs & Vida — Psicologia Islâmica' }}</p>
-          </div>
-        </section>
 
         @if (post.reflection) {
           <aside class="reflection">

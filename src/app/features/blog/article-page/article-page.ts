@@ -86,6 +86,12 @@ export class ArticlePageComponent {
     return cover ? this.blog.fileUrl(cover) : null;
   }
 
+  /** Foto do autor (avatar redondo); null → avatar com iniciais. */
+  protected authorPhotoUrl(): string | null {
+    const photo = this.meta()?.authorPhoto;
+    return photo ? this.blog.fileUrl(photo) : null;
+  }
+
   /** Iniciais do autor para o avatar (ex.: "Equipe Nafs & Vida" → "EN"). */
   protected initials(name: string): string {
     return name

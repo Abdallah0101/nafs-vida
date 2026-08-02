@@ -82,6 +82,54 @@
   gap: 1.6rem;
 }
 
+/* ---------- Paginação ---------- */
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: clamp(2.2rem, 4vw, 3rem);
+}
+
+.pager__btn {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  background: #fff;
+  border: 1px solid var(--color-line);
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition), opacity var(--transition);
+
+  app-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: rgba(176, 141, 87, 0.55);
+    color: var(--color-primary);
+  }
+
+  &:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+}
+
+.pager__num--active,
+.pager__num--active:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  box-shadow: 0 12px 24px -14px rgba(94, 20, 40, 0.55);
+  color: var(--color-cream);
+}
+
 @media (max-width: 1023px) {
   .blog-page__grid {
     grid-template-columns: repeat(2, 1fr);
