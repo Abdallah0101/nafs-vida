@@ -85,9 +85,26 @@ export class BlogService {
     // marked em chunk separado — só baixa quando alguém abre um artigo
     const { marked } = await import('marked');
     const body = markdown.replace(FRONTMATTER_RE, '');
-    const html = (await marked.parse(body)) as string;
+    let html = (await marked.parse(body)) as string;
     // Imagens com caminho relativo (covers/...) apontam para o repo de conteúdo
-    return html.replace(/src="(?!https?:|data:|\/)([^"]+)"/g, `src="${this.base}/$1"`);
+    html = html.replace(/src="(?!https?:|data:|\/)([^"]+)"/g, `src="${this.base}/$1"`);
+    return this.markArabicParagraphs(html);
+  }
+
+  /**
+   * Versículos/textos 100% em árabe ganham dir="rtl", lang="ar" e a classe
+   * .quran (fonte Amiri). Sem isso, árabe misturado com português vira uma
+   * bagunça de bidirecionalidade — ver AGENT.md do repo de conteúdo.
+   */
+  private markArabicParagraphs(html: string): string {
+    return html.replace(/<p>([\s\S]*?)<\/p>/g, (match, inner: string) => {
+      const text = inner.replace(/<[^>]+>/g, '');
+      const hasArabic = /[؀-ۿ﴾﴿]/.test(text);
+      const hasLatin = /[A-Za-zÀ-ÖØ-öø-ÿ]/.test(text);
+      return hasArabic && !hasLatin
+        ? `<p dir="rtl" lang="ar" class="quran">${inner}</p>`
+        : match;
+    });
   }
 
   private loadIndex(): void {

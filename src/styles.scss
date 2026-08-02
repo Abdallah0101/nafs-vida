@@ -548,3 +548,20 @@ footer[id] {
     color: var(--color-gold);
   }
 }
+
+/* ---------- Texto em árabe (versículos, hadith) ---------- */
+
+.prose .quran {
+  font-family: var(--font-arabic);
+  font-style: normal;
+  font-size: 1.55rem;
+  line-height: 2.2;
+  text-align: center;
+  color: var(--color-primary);
+}
+
+/* Dentro de citação: o árabe vem grande e a tradução menor logo abaixo */
+.prose blockquote .quran {
+  font-size: 1.65rem;
+  margin-bottom: 0.4rem;
+}
