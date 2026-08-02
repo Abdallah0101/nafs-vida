@@ -1,0 +1,12 @@
+@if (safeSrc(); as src) {
+  <div class="yt">
+    <iframe
+      [src]="src"
+      title="Vídeo do YouTube"
+      loading="lazy"
+      allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  </div>
+}

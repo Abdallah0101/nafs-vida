@@ -1,7 +1,6 @@
 import {
   ContactInfo,
   NavLink,
-  Post,
   ResourceItem,
   ServiceItem,
   SocialLink,
@@ -13,10 +12,11 @@ import {
 /**
  * Fonte única de conteúdo do site (Single Source of Truth).
  *
- * Qualquer texto da landing page mora aqui — nunca espalhado pelos
- * componentes. Quando o backend existir, este arquivo será substituído por
- * chamadas HTTP (ex.: `ContentService`), mantendo os mesmos contratos de
- * `core/models/content.model.ts`.
+ * Textos da landing page moram aqui — nunca espalhados pelos componentes.
+ * EXCEÇÃO: os artigos do blog vivem no repositório público `nafs-vida-content`
+ * e são lidos em runtime pelo `BlogService` (ver README > Conteúdo).
+ * Quando o backend existir, este arquivo será substituído por chamadas HTTP,
+ * mantendo os mesmos contratos de `core/models/content.model.ts`.
  */
 
 export const NAV_LINKS: readonly NavLink[] = [
@@ -144,36 +144,6 @@ export const TESTIMONIALS: readonly TestimonialItem[] = [
     name: 'F. K.',
     initials: 'FK',
     meta: 'Curitiba - PR'
-  }
-];
-
-export const POSTS: readonly Post[] = [
-  {
-    category: 'Saúde Emocional',
-    title: 'Ansiedade: quando a mente acelera e o coração pede calma',
-    excerpt:
-      'Entenda como a psicologia e a prática do dhikr podem caminhar juntas no cuidado com a ansiedade.',
-    date: '12 Jul 2026',
-    datetime: '2026-07-12',
-    icon: 'heart'
-  },
-  {
-    category: 'Espiritualidade',
-    title: 'Dhikr e presença: a atenção plena que sempre esteve no Islã',
-    excerpt:
-      'Muito antes da atenção plena virar tema da psicologia, o Islã já ensinava a arte de estar presente.',
-    date: '28 Jun 2026',
-    datetime: '2026-06-28',
-    icon: 'lantern'
-  },
-  {
-    category: 'Relacionamentos',
-    title: 'Mawaddah e Rahmah: amor e misericórdia na vida a dois',
-    excerpt:
-      'O que o Alcorão ensina sobre o vínculo entre casais — e como isso se encontra com a terapia de casal.',
-    date: '9 Jun 2026',
-    datetime: '2026-06-09',
-    icon: 'couple'
   }
 ];
 

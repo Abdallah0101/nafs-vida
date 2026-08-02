@@ -1,0 +1,28 @@
+<article class="post">
+  <a
+    class="post__media"
+    [class.pattern-bg]="!post().cover"
+    [class.pattern-bg--dark]="!post().cover"
+    [routerLink]="['/blog', post().slug]"
+    [attr.aria-label]="'Ler artigo: ' + post().title"
+  >
+    @if (coverUrl(); as cover) {
+      <img class="post__cover" [src]="cover" [alt]="post().title" loading="lazy" />
+    } @else {
+      <span class="post__icon-ring" aria-hidden="true">
+        <app-icon name="book" />
+      </span>
+    }
+    <span class="post__cat">{{ post().category }}</span>
+  </a>
+  <div class="post__body">
+    <h3 class="post__title">
+      <a [routerLink]="['/blog', post().slug]">{{ post().title }}</a>
+    </h3>
+    <p class="post__excerpt">{{ post().excerpt }}</p>
+    <div class="post__meta">
+      <time [attr.datetime]="post().date">{{ post().date | date: "dd MMM y" }}</time>
+      <span class="post__reading">{{ post().readingTime }} min de leitura</span>
+    </div>
+  </div>
+</article>

@@ -9,29 +9,18 @@
     </header>
 
     <div class="blog__grid">
-      @for (post of posts; track post.title; let i = $index) {
-        <article class="post" appReveal [appRevealDelay]="i * 110">
-          <div class="post__media pattern-bg pattern-bg--dark">
-            <span class="post__icon-ring" aria-hidden="true">
-              <app-icon [name]="post.icon" />
-            </span>
-            <span class="post__cat">{{ post.category }}</span>
-          </div>
-          <div class="post__body">
-            <h3 class="post__title">
-              <a href="#blog">{{ post.title }}</a>
-            </h3>
-            <p class="post__excerpt">{{ post.excerpt }}</p>
-            <div class="post__meta">
-              <time [attr.datetime]="post.datetime">{{ post.date }}</time>
-              <a class="link-more" href="#blog" [attr.aria-label]="'Ler artigo: ' + post.title">
-                Ler artigo
-                <app-icon name="chevron" style="width: 14px; height: 14px" />
-              </a>
-            </div>
-          </div>
-        </article>
+      @for (post of latestPosts(); track post.slug; let i = $index) {
+        <div appReveal [appRevealDelay]="i * 110" class="blog__cell">
+          <app-post-card [post]="post" />
+        </div>
       }
+    </div>
+
+    <div class="blog__more" appReveal [appRevealDelay]="340">
+      <a class="btn btn--primary" routerLink="/blog">
+        Ver todos os artigos
+        <app-icon name="chevron" style="width: 16px; height: 16px" />
+      </a>
     </div>
   </div>
 </section>

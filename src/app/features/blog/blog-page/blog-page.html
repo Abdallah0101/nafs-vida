@@ -1,0 +1,48 @@
+<section class="section blog-page">
+  <div class="container">
+    <header class="blog-page__head" appReveal>
+      <a class="link-more blog-page__back" routerLink="/">
+        <app-icon name="chevron" style="width: 15px; height: 15px; transform: rotate(180deg)" />
+        Voltar ao início
+      </a>
+      <span class="eyebrow">Blog</span>
+      <h1>Reflexões para a mente e o coração</h1>
+      <p class="blog-page__lead">
+        Artigos sobre saúde mental, espiritualidade e vida com propósito.
+      </p>
+    </header>
+
+    @if (loading()) {
+      <p class="blog-page__status">Carregando artigos…</p>
+    } @else {
+      @if (usingFallback()) {
+        <p class="blog-page__status blog-page__status--warn">
+          Mostrando conteúdo em cache — não foi possível atualizar agora.
+        </p>
+      }
+
+      <div class="blog-page__chips" role="group" aria-label="Filtrar por categoria">
+        @for (category of categories(); track category) {
+          <button
+            type="button"
+            class="chip"
+            [class.chip--active]="selectedCategory() === category"
+            (click)="selectedCategory.set(category)"
+          >
+            {{ category }}
+          </button>
+        }
+      </div>
+
+      @if (filtered().length > 0) {
+        <div class="blog-page__grid">
+          @for (post of filtered(); track post.slug) {
+            <app-post-card [post]="post" />
+          }
+        </div>
+      } @else {
+        <p class="blog-page__status">Nenhum artigo nesta categoria ainda.</p>
+      }
+    }
+  </div>
+</section>

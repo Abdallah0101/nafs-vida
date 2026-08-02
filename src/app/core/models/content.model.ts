@@ -33,15 +33,6 @@ export interface ResourceItem {
   action: string;
 }
 
-export interface Post {
-  category: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  datetime: string;
-  icon: IconName;
-}
-
 export interface StepItem {
   icon: IconName;
   title: string;

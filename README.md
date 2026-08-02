@@ -59,11 +59,29 @@ src/
 
 ### Conteúdo → futuro backend
 
-Todo texto do site (links, serviços, posts, contato…) está em
-**`core/content/site-content.ts`**, tipado por **`core/models/content.model.ts`**.
-Os componentes não têm conteúdo hardcoded: eles apenas consomem essas constantes.
+Os textos da landing page estão em **`core/content/site-content.ts`**, tipados
+por **`core/models/content.model.ts`**. Os componentes não têm conteúdo
+hardcoded: eles apenas consomem essas constantes.
 
-Quando a API existir, o caminho de migração é:
+### Conteúdo do blog (GitHub as CMS)
+
+Os **artigos** NÃO ficam neste repositório — vivem no repositório público
+[`nafs-vida-content`](https://github.com/Abdallah0101/nafs-vida-content)
+(Markdown + `posts.json`) e são lidos **em runtime** pelo
+`core/services/blog.service.ts` via `environment.contentBaseUrl`:
+
+- `GET posts.json` → índice de artigos (lista, home, filtros)
+- `GET posts/<slug>.md` → corpo do artigo (frontmatter removido, renderizado
+  com `marked` — carregado em chunk separado só quando um artigo é aberto)
+- A publicação é feita por um agente de IA seguindo o contrato
+  `AGENT.md` do repo de conteúdo (frontmatter + posts.json no mesmo commit)
+- Se o índice remoto falhar, a home usa um fallback local — o site nunca
+  fica vazio; a página /blog avisa que está mostrando cache
+- Vídeos: campo `youtube` no artigo → embed `youtube-nocookie.com`
+  (permitido em `frame-src` na CSP)
+- CSP: `connect-src` e `img-src` incluem `raw.githubusercontent.com`
+
+Quando uma API existir, o caminho de migração da landing page é:
 
 1. Criar `core/services/content.service.ts` com `HttpClient` (`provideHttpClient`
    no `app.config.ts`), buscando de `environment.apiUrl`.

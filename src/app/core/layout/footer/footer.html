@@ -1,7 +1,7 @@
 <footer class="footer pattern-bg pattern-bg--dark" id="contato">
   <div class="container footer__grid">
     <div class="footer__brand">
-      <a class="footer__logo" href="#inicio" aria-label="Nafs & Vida — voltar ao início">
+      <a class="footer__logo" [routerLink]="['/']" fragment="inicio" (click)="onNavClick($event, 'inicio')" aria-label="Nafs & Vida — voltar ao início">
         <app-logo tone="light" />
       </a>
       <p>
@@ -14,7 +14,7 @@
       <h2 class="footer__title">Navegação</h2>
       <ul>
         @for (link of navLinks; track link.label) {
-          <li><a [href]="link.href">{{ link.label }}</a></li>
+          <li><a [routerLink]="['/']" [fragment]="link.id" (click)="onNavClick($event, link.id)">{{ link.label }}</a></li>
         }
       </ul>
     </nav>
@@ -23,7 +23,7 @@
       <h2 class="footer__title">Serviços</h2>
       <ul>
         @for (link of serviceLinks; track link.label) {
-          <li><a [href]="link.href">{{ link.label }}</a></li>
+          <li><a [routerLink]="['/']" [fragment]="link.id" (click)="onNavClick($event, link.id)">{{ link.label }}</a></li>
         }
       </ul>
     </div>

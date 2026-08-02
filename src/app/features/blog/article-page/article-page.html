@@ -1,0 +1,79 @@
+<section class="section article">
+  @if (meta(); as post) {
+    <article>
+      <header class="container article__head">
+        <a class="link-more article__back" routerLink="/blog">
+          <app-icon name="chevron" style="width: 15px; height: 15px; transform: rotate(180deg)" />
+          Voltar para o blog
+        </a>
+        <span class="eyebrow">{{ post.category }}</span>
+        <h1>{{ post.title }}</h1>
+        <div class="article__meta">
+          <span class="article__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
+          <span class="article__byline">
+            <strong>{{ post.author }}</strong>
+            @if (post.authorRole) {
+              <small>{{ post.authorRole }}</small>
+            }
+          </span>
+          <span class="article__details">
+            <time [attr.datetime]="post.date">{{ post.date | date: "dd 'de' MMMM 'de' y" }}</time>
+            · {{ post.readingTime }} min de leitura
+          </span>
+        </div>
+      </header>
+
+      @if (coverUrl(); as cover) {
+        <figure class="container article__cover">
+          <img [src]="cover" [alt]="post.title" />
+        </figure>
+      }
+
+      <div class="container article__body">
+        @if (html()) {
+          <div class="prose" [innerHTML]="html()"></div>
+        } @else if (htmlError()) {
+          <p class="article__status">
+            Não foi possível carregar o artigo agora. Tente novamente em instantes.
+          </p>
+        } @else {
+          <p class="article__status">Carregando artigo…</p>
+        }
+
+        @if (post.youtube) {
+          <section class="article__video" aria-label="Vídeo relacionado ao artigo">
+            <h2>Assista</h2>
+            <app-youtube-embed [url]="post.youtube" />
+          </section>
+        }
+
+        @if (post.tags.length > 0) {
+          <ul class="article__tags" aria-label="Assuntos do artigo">
+            @for (tag of post.tags; track tag) {
+              <li>#{{ tag }}</li>
+            }
+          </ul>
+        }
+      </div>
+
+      @if (related().length > 0) {
+        <footer class="container article__related">
+          <h2>Leia também</h2>
+          <div class="article__related-grid">
+            @for (item of related(); track item.slug) {
+              <app-post-card [post]="item" />
+            }
+          </div>
+        </footer>
+      }
+    </article>
+  } @else if (loading()) {
+    <p class="article__status container">Carregando artigo…</p>
+  } @else {
+    <div class="container article__notfound">
+      <h1>Artigo não encontrado</h1>
+      <p>O endereço pode ter mudado — veja todos os artigos disponíveis no blog.</p>
+      <a class="btn btn--primary" routerLink="/blog">Ir para o blog</a>
+    </div>
+  }
+</section>
