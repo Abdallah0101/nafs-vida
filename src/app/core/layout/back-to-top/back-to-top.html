@@ -1,0 +1,10 @@
+<button
+  class="to-top"
+  type="button"
+  [class.to-top--visible]="visible()"
+  (click)="toTop()"
+  aria-label="Voltar ao topo"
+  [attr.tabindex]="visible() ? null : -1"
+>
+  <app-icon name="arrow-up" />
+</button>

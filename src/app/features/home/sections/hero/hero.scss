@@ -7,6 +7,31 @@
     linear-gradient(180deg, var(--color-cream) 0%, var(--color-background) 78%);
 }
 
+/* Estrela geométrica girando bem devagar — detalhe vivo, quase imperceptível */
+.hero__ornament {
+  position: absolute;
+  top: clamp(1.5rem, 4vw, 3rem);
+  right: clamp(1rem, 4vw, 3rem);
+  width: clamp(58px, 6.5vw, 88px);
+  height: auto;
+  stroke: var(--color-gold);
+  stroke-width: 1.1;
+  opacity: 0.45;
+  pointer-events: none;
+  animation: hero-spin 70s linear infinite;
+
+  circle {
+    fill: var(--color-gold);
+    stroke: none;
+  }
+}
+
+@keyframes hero-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Marca d'água em caligrafia árabe: "nafs" (نَفْس) */
 .hero__arabic {
   position: absolute;
@@ -143,11 +168,23 @@
 }
 
 /* Altura automática: a foto aparece inteira em qualquer largura,
-   sem corte — o arco acompanha a proporção natural da imagem */
+   sem corte — o arco acompanha a proporção natural da imagem.
+   Ken Burns: zoom lento e contínuo dá vida à cena. */
 .hero__img {
   display: block;
   width: 100%;
   height: auto;
+  animation: hero-zoom 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.07);
+  }
 }
 
 /* ---------- Tablet e mobile: empilhado ---------- */

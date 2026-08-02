@@ -42,6 +42,21 @@ export interface Post {
   icon: IconName;
 }
 
+export interface StepItem {
+  icon: IconName;
+  title: string;
+  text: string;
+}
+
+export interface TestimonialItem {
+  quote: string;
+  name: string;
+  /** Iniciais exibidas no avatar (ex.: "AM"). */
+  initials: string;
+  /** Localização/contexto exibido sob o nome (ex.: "São Paulo - SP"). */
+  meta: string;
+}
+
 export interface SocialLink {
   icon: IconName;
   label: string;

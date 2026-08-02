@@ -1,0 +1,32 @@
+<section class="section testimonials" aria-labelledby="testimonials-title">
+  <div class="container">
+    <header class="section-head" appReveal>
+      <span class="eyebrow">Depoimentos</span>
+      <h2 id="testimonials-title">Histórias de quem caminha conosco</h2>
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
+      </div>
+    </header>
+
+    <ul class="testimonials__grid">
+      @for (item of testimonials; track item.name; let i = $index) {
+        <li class="testimonial" appReveal [appRevealDelay]="i * 120">
+          <span class="testimonial__mark" aria-hidden="true">&ldquo;</span>
+          <span class="testimonial__stars" role="img" aria-label="Avaliação: 5 de 5">
+            @for (star of stars; track star) {
+              <app-icon name="rate" aria-hidden="true" />
+            }
+          </span>
+          <blockquote class="testimonial__quote">{{ item.quote }}</blockquote>
+          <footer class="testimonial__author">
+            <span class="testimonial__avatar" aria-hidden="true">{{ item.initials }}</span>
+            <span class="testimonial__who">
+              <strong>{{ item.name }}</strong>
+              <small>{{ item.meta }}</small>
+            </span>
+          </footer>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

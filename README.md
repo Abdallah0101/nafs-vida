@@ -37,7 +37,8 @@ src/
     ├── features/              # Páginas/funcionalidades
     │   └── home/              #   landing page
     │       ├── home.ts        #     composição da página
-    │       └── sections/      #     hero, values, services, highlight, about, blog, cta
+    │       └── sections/      #     hero, values, services, steps, highlight,
+    │                          #     about, testimonials, blog, cta
     │
     ├── shared/                # Reutilizável, sem regra de negócio
     │   ├── ui/                #   icon (SVGs da identidade), logo

@@ -1,0 +1,41 @@
+.to-top {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 1.4rem;
+  z-index: 55;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 52px;
+  padding-bottom: 4px;
+  background: var(--gradient-primary);
+  border: 1px solid rgba(176, 141, 87, 0.5);
+  /* Formato de mihrab (arco islâmico), assinatura da identidade */
+  border-radius: 999px 999px 10px 10px;
+  box-shadow: var(--shadow-lift);
+  color: var(--color-gold-soft);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px);
+  transition: opacity var(--transition), visibility var(--transition),
+    transform var(--transition), filter var(--transition);
+
+  app-icon {
+    width: 19px;
+    height: 19px;
+  }
+
+  &:hover {
+    filter: brightness(1.15);
+  }
+}
+
+.to-top--visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}

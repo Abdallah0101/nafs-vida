@@ -82,6 +82,15 @@
         right: 0;
       }
     }
+
+    /* Scrollspy: link da seção visível fica aceso */
+    &.active {
+      color: var(--color-gold-soft);
+
+      &::after {
+        right: 0;
+      }
+    }
   }
 }
 

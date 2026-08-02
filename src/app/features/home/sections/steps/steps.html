@@ -1,0 +1,24 @@
+<section class="section steps" aria-labelledby="steps-title">
+  <div class="container">
+    <header class="section-head" appReveal>
+      <span class="eyebrow">Como funciona</span>
+      <h2 id="steps-title">Seu primeiro passo é simples</h2>
+      <div class="ornament" aria-hidden="true">
+        <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
+      </div>
+    </header>
+
+    <ol class="steps__grid">
+      @for (step of steps; track step.title; let i = $index) {
+        <li class="step" appReveal [appRevealDelay]="i * 130">
+          <span class="step__num" aria-hidden="true">0{{ i + 1 }}</span>
+          <span class="step__icon" aria-hidden="true">
+            <app-icon [name]="step.icon" />
+          </span>
+          <h3 class="step__title">{{ step.title }}</h3>
+          <p class="step__text">{{ step.text }}</p>
+        </li>
+      }
+    </ol>
+  </div>
+</section>

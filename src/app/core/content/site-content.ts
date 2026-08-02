@@ -5,6 +5,8 @@ import {
   ResourceItem,
   ServiceItem,
   SocialLink,
+  StepItem,
+  TestimonialItem,
   ValueItem
 } from '@core/models/content.model';
 
@@ -97,6 +99,52 @@ export const ABOUT_POINTS: readonly string[] = [
   'Atendimento ético, sigiloso e livre de julgamentos',
   'Psicologia baseada em evidências, em diálogo com a tradição islâmica',
   'Atendimento online para todo o Brasil'
+];
+
+export const STEPS: readonly StepItem[] = [
+  {
+    icon: 'calendar',
+    title: 'Agende sua conversa',
+    text: 'Escolha o melhor horário pelo site ou WhatsApp — rápido e sem complicação.'
+  },
+  {
+    icon: 'heart',
+    title: 'Sessão de acolhimento',
+    text: 'Uma primeira conversa para entender sua história, suas dores e seus objetivos.'
+  },
+  {
+    icon: 'crescent',
+    title: 'Jornada personalizada',
+    text: 'Um plano terapêutico feito para você, unindo psicologia e fé no seu ritmo.'
+  }
+];
+
+/**
+ * PLACEHOLDER — substituir por depoimentos reais (com consentimento dos
+ * pacientes) quando existirem. Iniciais e cidades são fictícias.
+ */
+export const TESTIMONIALS: readonly TestimonialItem[] = [
+  {
+    quote:
+      'Pela primeira vez encontrei um espaço onde a minha fé não ficou de fora da terapia. Isso mudou tudo para mim.',
+    name: 'A. M.',
+    initials: 'AM',
+    meta: 'São Paulo - SP'
+  },
+  {
+    quote:
+      'Cheguei com a ansiedade no limite e encontrei escuta de verdade. Hoje me sinto em paz comigo e com a minha fé.',
+    name: 'R. S.',
+    initials: 'RS',
+    meta: 'Rio de Janeiro - RJ'
+  },
+  {
+    quote:
+      'Profissionalismo raro. Me senti acolhida do início ao fim, sem julgamentos. Recomendo de coração.',
+    name: 'F. K.',
+    initials: 'FK',
+    meta: 'Curitiba - PR'
+  }
 ];
 
 export const POSTS: readonly Post[] = [

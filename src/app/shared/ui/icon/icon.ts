@@ -22,7 +22,9 @@ export type IconName =
   | 'whatsapp'
   | 'shield'
   | 'globe'
-  | 'check';
+  | 'check'
+  | 'arrow-up'
+  | 'rate';
 
 /**
  * Ícone linear da identidade Nafs & Vida.
