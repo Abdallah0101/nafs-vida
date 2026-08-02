@@ -4,7 +4,6 @@ import { Component, input } from '@angular/core';
 export type IconName =
   | 'book'
   | 'heart'
-  | 'star'
   | 'lantern'
   | 'person'
   | 'couple'

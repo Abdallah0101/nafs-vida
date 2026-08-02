@@ -40,7 +40,7 @@ export const VALUES: readonly ValueItem[] = [
     text: 'Um espaço seguro, ético e livre de julgamentos.'
   },
   {
-    icon: 'star',
+    icon: 'crescent',
     title: 'Cura Integral',
     text: 'Trabalhamos mente, coração e espírito.'
   },

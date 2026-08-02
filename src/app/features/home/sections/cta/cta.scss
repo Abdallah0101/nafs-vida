@@ -53,19 +53,6 @@
   color: rgba(246, 239, 228, 0.78);
 }
 
-.cta__star {
-  width: 46px;
-  height: 46px;
-  margin-bottom: 1.8rem;
-  stroke: var(--color-gold);
-  stroke-width: 1.2;
-
-  circle {
-    fill: var(--color-gold);
-    stroke: none;
-  }
-}
-
 .cta__actions {
   display: flex;
   flex-wrap: wrap;
