@@ -1,45 +1,118 @@
-<section class="section blog-page">
-  <div class="container">
-    <header class="blog-page__head" appReveal>
-      <a class="link-more blog-page__back" routerLink="/">
-        <app-icon name="chevron" style="width: 15px; height: 15px; transform: rotate(180deg)" />
-        Voltar ao início
-      </a>
-      <span class="eyebrow">Blog</span>
-      <h1>Reflexões para a mente e o coração</h1>
-      <p class="blog-page__lead">
-        Artigos sobre saúde mental, espiritualidade e vida com propósito.
-      </p>
-    </header>
+<!-- ======================= Hero editorial ======================= -->
+<section class="blog-hero pattern-bg pattern-bg--dark">
+  <div class="container blog-hero__inner" appReveal>
+    <a class="blog-hero__back" routerLink="/">
+      <app-icon name="chevron" style="width: 15px; height: 15px; transform: rotate(180deg)" />
+      Voltar ao início
+    </a>
+    <span class="eyebrow blog-hero__eyebrow">Blog · Nafs &amp; Vida</span>
+    <h1>Reflexões para a <em>mente</em> e o <em>coração</em></h1>
+    <p class="blog-hero__lead">
+      Artigos sobre saúde mental, espiritualidade e vida com propósito —
+      leitura calma, para guardar no peito.
+    </p>
+    @if (stats().articles > 0) {
+      <ul class="blog-hero__stats" aria-label="Resumo do acervo">
+        <li>
+          <strong>{{ stats().articles }}</strong>
+          <span>artigos</span>
+        </li>
+        <li>
+          <strong>{{ stats().categories }}</strong>
+          <span>temas</span>
+        </li>
+        <li>
+          <strong>{{ stats().minutes }}</strong>
+          <span>min de leitura</span>
+        </li>
+      </ul>
+    }
+  </div>
+</section>
 
+<!-- ======================= Acervo ======================= -->
+<section class="blog-list">
+  <div class="container">
     @if (loading()) {
-      <p class="blog-page__status">Carregando artigos…</p>
+      <p class="blog-list__status">Carregando artigos…</p>
     } @else {
+      <!-- Destaque: artigo mais recente, sobreposto ao hero -->
+      @if (featured(); as post) {
+        <article class="feature" appReveal>
+          <a
+            class="feature__media"
+            [class.pattern-bg]="!post.cover"
+            [class.pattern-bg--dark]="!post.cover"
+            [routerLink]="['/blog', post.slug]"
+            [attr.aria-label]="'Ler artigo: ' + post.title"
+          >
+            @if (coverUrl(post); as cover) {
+              <img class="feature__cover" [src]="cover" [alt]="post.title" />
+            } @else {
+              <span class="feature__icon-ring" aria-hidden="true">
+                <app-icon name="book" />
+              </span>
+            }
+            <span class="feature__badge">
+              <app-icon name="lantern" />
+              Mais recente
+            </span>
+          </a>
+          <div class="feature__body">
+            <span class="eyebrow">{{ post.category }}</span>
+            <h2 class="feature__title">
+              <a [routerLink]="['/blog', post.slug]">{{ post.title }}</a>
+            </h2>
+            <p class="feature__excerpt">{{ post.excerpt }}</p>
+            <div class="feature__meta">
+              @if (authorPhotoUrl(post); as photo) {
+                <img class="feature__avatar feature__avatar--photo" [src]="photo" [alt]="post.author" />
+              } @else {
+                <span class="feature__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
+              }
+              <span class="feature__byline">
+                <strong>{{ post.author }}</strong>
+                <small>
+                  <time [attr.datetime]="post.date">{{ post.date | date: "dd 'de' MMMM 'de' y" }}</time>
+                  · {{ post.readingTime }} min de leitura
+                </small>
+              </span>
+            </div>
+            <a class="link-more feature__cta" [routerLink]="['/blog', post.slug]">
+              Ler artigo
+              <app-icon name="chevron" style="width: 15px; height: 15px" />
+            </a>
+          </div>
+        </article>
+      }
+
       @if (usingFallback()) {
-        <p class="blog-page__status blog-page__status--warn">
+        <p class="blog-list__status blog-list__status--warn">
           Mostrando conteúdo em cache — não foi possível atualizar agora.
         </p>
       }
 
-      <div class="blog-page__chips" role="group" aria-label="Filtrar por categoria">
-        @for (category of categories(); track category) {
-          <button
-            type="button"
-            class="chip"
-            [class.chip--active]="selectedCategory() === category"
-            (click)="selectCategory(category)"
-          >
-            {{ category }}
-          </button>
-        }
-      </div>
-
       @if (filtered().length > 0) {
-        <div class="blog-page__grid">
-          @for (post of pageItems(); track post.slug) {
-            <app-post-card [post]="post" />
+        <div class="blog-list__chips" role="group" aria-label="Filtrar por categoria">
+          @for (category of categories(); track category) {
+            <button
+              type="button"
+              class="chip"
+              [class.chip--active]="selectedCategory() === category"
+              (click)="selectCategory(category)"
+            >
+              {{ category }}
+            </button>
           }
         </div>
+
+        @if (gridItems().length > 0) {
+          <div class="blog-list__grid">
+            @for (post of gridItems(); track post.slug) {
+              <app-post-card [post]="post" />
+            }
+          </div>
+        }
 
         @if (totalPages() > 1) {
           <nav class="pager" aria-label="Paginação do blog">
@@ -75,7 +148,7 @@
           </nav>
         }
       } @else {
-        <p class="blog-page__status">Nenhum artigo nesta categoria ainda.</p>
+        <p class="blog-list__status">Nenhum artigo nesta categoria ainda.</p>
       }
     }
   </div>

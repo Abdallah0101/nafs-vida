@@ -12,6 +12,7 @@ export type IconName =
   | 'headphones'
   | 'play'
   | 'calendar'
+  | 'clock'
   | 'chevron'
   | 'phone'
   | 'mail'

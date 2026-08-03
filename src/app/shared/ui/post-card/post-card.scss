@@ -105,10 +105,15 @@
 }
 
 .post__excerpt {
+  display: -webkit-box;
   margin-top: 0.75rem;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
   font-size: 0.89rem;
   line-height: 1.6;
   color: var(--color-text-muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .post__meta {
@@ -117,7 +122,20 @@
   justify-content: space-between;
   gap: 1rem;
   margin-top: auto;
-  padding-top: 1.5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--color-line);
   font-size: 0.8rem;
   color: var(--color-text-muted);
+}
+
+.post__meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  app-icon {
+    width: 14px;
+    height: 14px;
+    color: var(--color-gold-deep);
+  }
 }

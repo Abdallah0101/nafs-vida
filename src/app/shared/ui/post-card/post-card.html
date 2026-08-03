@@ -21,8 +21,14 @@
     </h3>
     <p class="post__excerpt">{{ post().excerpt }}</p>
     <div class="post__meta">
-      <time [attr.datetime]="post().date">{{ post().date | date: "dd MMM y" }}</time>
-      <span class="post__reading">{{ post().readingTime }} min de leitura</span>
+      <span class="post__meta-item">
+        <app-icon name="calendar" />
+        <time [attr.datetime]="post().date">{{ post().date | date: "dd MMM y" }}</time>
+      </span>
+      <span class="post__meta-item">
+        <app-icon name="clock" />
+        {{ post().readingTime }} min de leitura
+      </span>
     </div>
   </div>
 </article>

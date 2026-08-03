@@ -7,6 +7,7 @@ import { map } from 'rxjs';
 import { environment } from '@env/environment';
 import { BlogPostMeta } from '@core/models/blog-post.model';
 import { BlogService } from '@core/services/blog.service';
+import { RevealDirective } from '@shared/directives/reveal.directive';
 import { IconComponent } from '@shared/ui/icon/icon';
 import { PostCardComponent } from '@shared/ui/post-card/post-card';
 import { YoutubeEmbedComponent } from '@shared/ui/youtube-embed/youtube-embed';
@@ -17,12 +18,13 @@ interface TocItem {
   text: string;
 }
 
-/** Página de um artigo: /blog/<slug>. */
+/** Página de um artigo: /blog/<slug> (v5 — hero editorial escuro + capa sobreposta). */
 @Component({
   selector: 'app-article-page',
   imports: [
     DatePipe,
     RouterLink,
+    RevealDirective,
     IconComponent,
     PostCardComponent,
     YoutubeEmbedComponent,

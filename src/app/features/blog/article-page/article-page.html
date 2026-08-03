@@ -1,53 +1,61 @@
-<section class="section article">
+<section class="article">
   <div class="article__progress" aria-hidden="true">
     <span [style.width.%]="progress()"></span>
   </div>
 
   @if (meta(); as post) {
     <article>
-      <header class="container article__head">
-        <nav class="article__breadcrumb" aria-label="Trilha de navegação">
-          <a routerLink="/">Início</a>
-          <span aria-hidden="true">›</span>
-          <a routerLink="/blog">Blog</a>
-          <span aria-hidden="true">›</span>
-          <span aria-current="page">{{ post.category }}</span>
-        </nav>
-        <span class="article__cat">{{ post.category }}</span>
-        <h1>{{ post.title }}</h1>
-        <p class="article__lede">{{ post.excerpt }}</p>
-        <div class="article__meta">
-          @if (authorPhotoUrl(); as photo) {
-            <img class="article__avatar article__avatar--photo" [src]="photo" [alt]="post.author" />
-          } @else {
-            <span class="article__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
-          }
-          <span class="article__byline">
-            <strong>{{ post.author }}</strong>
-            @if (post.authorRole) {
-              <small>{{ post.authorRole }}</small>
+      <!-- ======================= Hero editorial ======================= -->
+      <header class="article-hero pattern-bg pattern-bg--dark" [class.article-hero--solo]="!coverUrl()">
+        <div class="container article-hero__inner" appReveal>
+          <nav class="article-hero__breadcrumb" aria-label="Trilha de navegação">
+            <a routerLink="/">Início</a>
+            <span aria-hidden="true">›</span>
+            <a routerLink="/blog">Blog</a>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{{ post.category }}</span>
+          </nav>
+          <span class="eyebrow article-hero__cat">{{ post.category }}</span>
+          <h1>{{ post.title }}</h1>
+          <p class="article-hero__lede">{{ post.excerpt }}</p>
+          <div class="article-hero__meta">
+            @if (authorPhotoUrl(); as photo) {
+              <img class="article-hero__avatar article-hero__avatar--photo" [src]="photo" [alt]="post.author" />
+            } @else {
+              <span class="article-hero__avatar" aria-hidden="true">{{ initials(post.author) }}</span>
             }
-          </span>
-          <span class="article__details">
-            <time [attr.datetime]="post.date">{{ post.date | date: "dd 'de' MMMM 'de' y" }}</time>
-            · {{ post.readingTime }} min de leitura
-          </span>
-        </div>
-        <div class="ornament article__ornament" aria-hidden="true">
-          <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
+            <span class="article-hero__byline">
+              <strong>{{ post.author }}</strong>
+              @if (post.authorRole) {
+                <small>{{ post.authorRole }}</small>
+              }
+            </span>
+            <span class="article-hero__sep" aria-hidden="true"></span>
+            <span class="article-hero__details">
+              <time [attr.datetime]="post.date">{{ post.date | date: "dd 'de' MMMM 'de' y" }}</time>
+              · {{ post.readingTime }} min de leitura
+            </span>
+          </div>
+          <div class="ornament article-hero__ornament" aria-hidden="true">
+            <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
+          </div>
         </div>
       </header>
 
+      <!-- Capa sobreposta ao hero -->
       @if (coverUrl(); as cover) {
         <figure class="container article__cover">
           <img [src]="cover" [alt]="post.title" />
         </figure>
       }
 
-      <div class="container article__body">
+      <div class="container article__body" [class.article__body--flush]="!coverUrl()">
         @if (toc().length >= 3) {
           <nav class="toc" aria-label="Sumário do artigo">
-            <strong>Neste artigo</strong>
+            <strong>
+              <app-icon name="book" />
+              Neste artigo
+            </strong>
             <ol>
               @for (item of toc(); track item.index) {
                 <li>
@@ -109,7 +117,13 @@
 
       @if (related().length > 0) {
         <footer class="container article__related">
-          <h2>Leia também</h2>
+          <div class="article__related-head">
+            <span class="eyebrow">Leia também</span>
+            <h2>Continue a reflexão</h2>
+            <div class="ornament" aria-hidden="true">
+              <svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" /></svg>
+            </div>
+          </div>
           <div class="article__related-grid">
             @for (item of related(); track item.slug) {
               <app-post-card [post]="item" />

@@ -1,16 +1,22 @@
 import { Component, computed, inject, signal } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
+import { BlogPostMeta } from '@core/models/blog-post.model';
 import { BlogService } from '@core/services/blog.service';
 import { RevealDirective } from '@shared/directives/reveal.directive';
 import { IconComponent } from '@shared/ui/icon/icon';
 import { PostCardComponent } from '@shared/ui/post-card/post-card';
 
-/** Página do blog: artigos com filtro por categoria e paginação (9 por página). */
+/**
+ * Página do blog (v5): hero editorial escuro com estatísticas do acervo,
+ * artigo mais recente em destaque, filtro por categoria e paginação
+ * (9 por página — na 1ª página o destaque ocupa 1 vaga, sobrando 8 no grid).
+ */
 @Component({
   selector: 'app-blog-page',
-  imports: [RouterLink, RevealDirective, IconComponent, PostCardComponent],
+  imports: [DatePipe, RouterLink, RevealDirective, IconComponent, PostCardComponent],
   templateUrl: './blog-page.html',
   styleUrl: './blog-page.scss'
 })
@@ -57,6 +63,44 @@ export class BlogPageComponent {
     Array.from({ length: this.totalPages() }, (_, i) => i + 1)
   );
 
+  /** Números do acervo exibidos no hero (some enquanto carrega). */
+  protected readonly stats = computed(() => {
+    const posts = this.blog.posts();
+    return {
+      articles: posts.length,
+      categories: new Set(posts.map((post) => post.category)).size,
+      minutes: posts.reduce((sum, post) => sum + post.readingTime, 0)
+    };
+  });
+
+  /** Destaque editorial: o artigo mais recente da seleção (só na 1ª página). */
+  protected readonly featured = computed(() =>
+    this.currentPage() === 1 ? (this.pageItems()[0] ?? null) : null
+  );
+
+  /** Artigos do grid — o destaque não se repete na grade. */
+  protected readonly gridItems = computed(() =>
+    this.featured() ? this.pageItems().slice(1) : this.pageItems()
+  );
+
+  protected coverUrl(post: BlogPostMeta): string | null {
+    return post.cover ? this.blog.fileUrl(post.cover) : null;
+  }
+
+  protected authorPhotoUrl(post: BlogPostMeta): string | null {
+    return post.authorPhoto ? this.blog.fileUrl(post.authorPhoto) : null;
+  }
+
+  protected initials(name: string): string {
+    return name
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part[0])
+      .join('')
+      .toUpperCase();
+  }
+
   protected selectCategory(category: string): void {
     this.selectedCategory.set(category);
     this.goToPage(1, false);
@@ -72,7 +116,7 @@ export class BlogPageComponent {
     });
     if (scroll) {
       document
-        .querySelector('.blog-page__grid')
+        .querySelector('.blog-list__chips')
         ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }

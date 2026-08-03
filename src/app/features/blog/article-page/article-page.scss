@@ -1,3 +1,11 @@
+/* ============================================================
+   Artigo v5 — hero editorial escuro, capa sobreposta e corpo
+   ============================================================ */
+
+.article {
+  padding-bottom: clamp(4.5rem, 8vw, 7rem);
+}
+
 /* Barra de progresso de leitura (fixa no topo) */
 .article__progress {
   position: fixed;
@@ -16,35 +24,47 @@
   }
 }
 
-.article__head {
-  max-width: 780px;
-  margin-inline: auto;
-  text-align: center;
+/* ---------- Hero editorial ---------- */
 
-  h1 {
-    margin-top: 1rem;
-    font-size: clamp(2.2rem, 4.6vw, 3.5rem);
-    line-height: 1.12;
-    text-wrap: balance;
-  }
+.article-hero {
+  position: relative;
+  overflow: clip;
+  /* Respiro inferior maior: a capa sobrepõe o hero */
+  padding-block: clamp(4rem, 7vw, 5.5rem) clamp(5rem, 8vw, 6.5rem);
+  background:
+    radial-gradient(48% 60% at 88% 6%, rgba(176, 141, 87, 0.22), transparent 62%),
+    radial-gradient(42% 55% at 4% 96%, rgba(176, 141, 87, 0.12), transparent 60%),
+    linear-gradient(160deg, var(--color-primary-deep) 0%, var(--color-primary) 55%, var(--color-primary-dark) 100%);
+  color: var(--color-cream);
+  text-align: center;
 }
 
-.article__breadcrumb {
+/* Sem capa: o hero fecha mais compacto */
+.article-hero--solo {
+  padding-block-end: clamp(3.2rem, 5vw, 4.2rem);
+}
+
+.article-hero__inner {
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.article-hero__breadcrumb {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.55rem;
-  margin-bottom: 1.8rem;
+  margin-bottom: 1.7rem;
   font-size: 0.82rem;
-  color: var(--color-text-muted);
+  color: rgba(246, 239, 228, 0.6);
 
   a {
     text-decoration: none;
     transition: color var(--transition);
 
     &:hover {
-      color: var(--color-gold-deep);
+      color: var(--color-gold-soft);
     }
   }
 
@@ -53,69 +73,72 @@
   }
 
   span[aria-current='page'] {
-    color: var(--color-gold-deep);
+    color: var(--color-gold-soft);
     font-weight: 500;
   }
 }
 
-/* Categoria em pill dourada */
-.article__cat {
-  display: inline-block;
-  padding: 0.5rem 1.05rem;
-  background: rgba(255, 255, 255, 0.68);
-  border: 1px solid rgba(176, 141, 87, 0.42);
+/* Categoria em pill dourada (kicker do hero) */
+.article-hero__cat {
+  padding: 0.55rem 1.1rem;
+  background: rgba(246, 239, 228, 0.07);
+  border: 1px solid rgba(176, 141, 87, 0.5);
   border-radius: 999px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--color-gold-deep);
+  color: var(--color-gold-soft);
+}
+
+.article-hero h1 {
+  margin-top: 1.4rem;
+  font-size: clamp(2.2rem, 4.6vw, 3.5rem);
+  line-height: 1.12;
+  color: var(--color-cream);
+  text-wrap: balance;
 }
 
 /* Lede: o resumo do artigo em destaque editorial */
-.article__lede {
+.article-hero__lede {
   margin: 1.4rem auto 0;
   max-width: 58ch;
   font-family: var(--font-reading);
   font-size: 1.13rem;
   font-style: italic;
   line-height: 1.65;
-  color: var(--color-text-muted);
+  color: rgba(246, 239, 228, 0.78);
   text-wrap: pretty;
 }
 
-.article__meta {
+.article-hero__meta {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
   gap: 0.8rem 1rem;
-  margin-top: 1.8rem;
+  margin-top: 1.9rem;
 }
 
-.article__avatar {
+.article-hero__avatar {
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   flex: none;
-  background: var(--gradient-primary);
+  background: rgba(246, 239, 228, 0.1);
+  border: 1px solid rgba(176, 141, 87, 0.55);
   border-radius: 50%;
-  box-shadow: 0 10px 18px -10px rgba(94, 20, 40, 0.55);
   font-size: 0.82rem;
   font-weight: 600;
   color: var(--color-gold-soft);
 }
 
 /* Avatar com foto real do autor */
-.article__avatar--photo {
+.article-hero__avatar--photo {
   width: 52px;
   height: 52px;
   object-fit: cover;
-  border: 2px solid rgba(176, 141, 87, 0.55);
+  border-width: 2px;
 }
 
-.article__byline {
+.article-hero__byline {
   display: flex;
   flex-direction: column;
   line-height: 1.3;
@@ -123,27 +146,40 @@
 
   strong {
     font-size: 0.95rem;
-    color: var(--color-primary);
+    font-weight: 600;
+    color: var(--color-cream);
   }
 
   small {
     font-size: 0.76rem;
-    color: var(--color-text-muted);
+    color: rgba(246, 239, 228, 0.65);
   }
 }
 
-.article__details {
-  font-size: 0.85rem;
-  color: var(--color-text-muted);
+/* Filete vertical separando autor e data */
+.article-hero__sep {
+  width: 1px;
+  height: 30px;
+  margin-inline: 0.4rem;
+  background: rgba(176, 141, 87, 0.5);
 }
 
-.article__ornament {
-  margin-top: 2rem;
+.article-hero__details {
+  font-size: 0.85rem;
+  color: rgba(246, 239, 228, 0.72);
 }
+
+.article-hero__ornament {
+  margin-top: 2.1rem;
+}
+
+/* ---------- Capa sobreposta ao hero ---------- */
 
 .article__cover {
+  position: relative;
+  z-index: 1;
   max-width: 880px;
-  margin: clamp(2rem, 4vw, 3rem) auto 0;
+  margin: clamp(-3.6rem, -5vw, -2.6rem) auto 0;
 
   img {
     width: 100%;
@@ -152,13 +188,20 @@
   }
 }
 
+/* ---------- Corpo ---------- */
+
 .article__body {
   max-width: 720px;
-  margin-top: clamp(2rem, 4vw, 3rem);
+  margin-top: clamp(2.2rem, 4vw, 3.2rem);
+}
+
+/* Sem capa: o corpo chega mais perto do hero */
+.article__body--flush {
+  margin-top: clamp(1.6rem, 3vw, 2.4rem);
 }
 
 .article__status {
-  padding: 2rem 0;
+  padding: clamp(4rem, 8vw, 6rem) 0;
   text-align: center;
   color: var(--color-text-muted);
 }
@@ -177,13 +220,20 @@
   border-radius: var(--radius-lg);
 
   strong {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 0.8rem;
     font-size: 0.74rem;
     font-weight: 600;
     letter-spacing: 0.26em;
     text-transform: uppercase;
     color: var(--color-gold-deep);
+
+    app-icon {
+      width: 15px;
+      height: 15px;
+    }
   }
 
   ol {
@@ -324,21 +374,32 @@
   border-top: 1px solid var(--color-line);
 
   li {
-    padding: 0.35rem 0.8rem;
-    background: var(--color-sand);
+    padding: 0.35rem 0.85rem;
+    background: var(--color-cream);
+    border: 1px solid rgba(176, 141, 87, 0.35);
     border-radius: 999px;
     font-size: 0.78rem;
-    color: var(--color-text-muted);
+    color: var(--color-gold-deep);
   }
 }
 
+/* ---------- Leia também ---------- */
+
 .article__related {
   margin-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.article__related-head {
+  margin-bottom: clamp(1.8rem, 3.5vw, 2.6rem);
+  text-align: center;
 
   h2 {
-    margin-bottom: 1.8rem;
-    font-size: clamp(1.7rem, 3vw, 2.2rem);
-    text-align: center;
+    margin-top: 0.8rem;
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+  }
+
+  .ornament {
+    margin-top: 1.2rem;
   }
 }
 
@@ -349,7 +410,7 @@
 }
 
 .article__notfound {
-  padding: 4rem 0;
+  padding: clamp(4.5rem, 9vw, 7rem) 0;
   text-align: center;
 
   p {
@@ -358,6 +419,8 @@
     color: var(--color-text-muted);
   }
 }
+
+/* ---------- Responsivo ---------- */
 
 @media (max-width: 1023px) {
   .article__related-grid {
@@ -372,5 +435,11 @@
 
   .reflection {
     padding: 1.2rem 1.1rem;
+  }
+}
+
+@media (max-width: 560px) {
+  .article-hero__sep {
+    display: none;
   }
 }
